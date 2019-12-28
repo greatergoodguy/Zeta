@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ninja : MonoBehaviour
+public class NinjaNodeWalk : MonoBehaviour
 {
-    public static Ninja I;
+    public static NinjaNodeWalk I;
 
     public float speed = 5.0f;
     public float jumpForce = 500;
