@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Ninja : MonoBehaviour
 {
+    public static Ninja I;
 
     public float speed = 5.0f;
     public float jumpForce = 500;
 
     bool canJump = true;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        I = this;
     }
 
     // Update is called once per frame
