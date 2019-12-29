@@ -6,22 +6,16 @@ public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base
 {
     public static NinjaNodeIdle I;
 
+    public Ninja ninja;
+
     void Awake()
     {
         I = this;
     }
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
     public void EnterNode() {
+        ninja = Ninja.I;
+        //ninja.GetComponent<Animator>().SetInteger("animation", 1);
     }
 
     public void UpdateNode() {
