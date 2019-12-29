@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base {
-    public static NinjaNodeIdle I;
+public class NinjaNodeThrow : MonoBehaviour, NinjaNode_Base {
+    public static NinjaNodeThrow I;
 
     Ninja ninja;
+
+    float elapsedTime;
 
     void Awake()
     {
@@ -14,16 +16,15 @@ public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base {
 
     public void EnterNode() {
         ninja = Ninja.I;
-        ninja.SetAnimation(0);
+        ninja.SetAnimation(14);
+        elapsedTime = 0;
     }
 
     public void UpdateNode() {
-        ninja.JumpIfInput();
-        ninja.ThrowIfInput();
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
-            ninja.SwitchNode(NinjaNodeWalk.I);
+        elapsedTime += Time.deltaTime;
+        if(elapsedTime > 0.3f) {
+            ninja.SwitchNode(NinjaNodeIdle.I);
         }
-
     }
 
     public void FixedUpdateNode() {}

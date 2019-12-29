@@ -20,18 +20,15 @@ public class NinjaNodeWalk : MonoBehaviour, NinjaNode_Base {
     }
 
     public void UpdateNode() {
-        if (Input.GetKey(KeyCode.Space)) {
-            ninja.SwitchNode(NinjaNodeJumpRise.I);
-        }
+        ninja.JumpIfInput();
+        ninja.ThrowIfInput();
 
         if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && ninja != null) {
             ninja.SwitchNode(NinjaNodeIdle.I);
         }
     }
 
-    public void FixedUpdateNode() {
-        //ninja.MoveHorizontal();
-    }
+    public void FixedUpdateNode() {}
 
     public void ExitNode() {}
 

@@ -24,9 +24,7 @@ public class NinjaNodeJumpFall : MonoBehaviour, NinjaNode_Base {
 
     public void UpdateNode() {}
 
-    public void FixedUpdateNode() {
-        //ninja.MoveHorizontal();
-    }
+    public void FixedUpdateNode() {}
 
     public void ExitNode() {
         isActive = false;

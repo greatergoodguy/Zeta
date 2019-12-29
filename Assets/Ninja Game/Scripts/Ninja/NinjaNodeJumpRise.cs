@@ -31,9 +31,7 @@ public class NinjaNodeJumpRise : MonoBehaviour, NinjaNode_Base {
     }
 
 
-    public void FixedUpdateNode() {
-        //ninja.MoveHorizontal();
-    }
+    public void FixedUpdateNode() {}
 
     public void ExitNode() {
         isActive = false;
