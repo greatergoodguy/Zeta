@@ -7,6 +7,8 @@ public class NinjaNodeWalk : MonoBehaviour, NinjaNode_Base {
 
     Ninja ninja;
 
+    private Rigidbody2D _rigidbody;
+
     void Awake() {
         I = this;
     }
@@ -14,17 +16,10 @@ public class NinjaNodeWalk : MonoBehaviour, NinjaNode_Base {
     public void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(15);
+        _rigidbody = ninja.GetComponent<Rigidbody2D>();
     }
 
     public void UpdateNode() {
-        if (Input.GetKey(KeyCode.A)) {
-            transform.position += Vector3.left * Time.deltaTime * Ninja.I.speed;
-
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            transform.position += Vector3.right * Time.deltaTime * Ninja.I.speed;
-        }
-
         if (Input.GetKey(KeyCode.Space)) {
             ninja.SwitchNode(NinjaNodeJumpRise.I);
         }
@@ -32,6 +27,10 @@ public class NinjaNodeWalk : MonoBehaviour, NinjaNode_Base {
         if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && ninja != null) {
             ninja.SwitchNode(NinjaNodeIdle.I);
         }
+    }
+
+    public void FixedUpdateNode() {
+        //ninja.MoveHorizontal();
     }
 
     public void ExitNode() {}

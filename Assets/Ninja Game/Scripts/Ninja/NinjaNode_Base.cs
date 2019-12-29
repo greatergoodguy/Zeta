@@ -5,5 +5,6 @@ using UnityEngine;
 public interface NinjaNode_Base {
     void EnterNode();
     void UpdateNode();
+    void FixedUpdateNode();
     void ExitNode();
 }

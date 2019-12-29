@@ -7,6 +7,8 @@ public class NinjaNodeJumpFall : MonoBehaviour, NinjaNode_Base {
 
     Ninja ninja;
 
+    private Rigidbody2D _rigidbody;
+
     bool isActive;
 
     void Awake() {
@@ -16,17 +18,14 @@ public class NinjaNodeJumpFall : MonoBehaviour, NinjaNode_Base {
     public void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(18);
+        _rigidbody = ninja.GetComponent<Rigidbody2D>();
         isActive = true;
     }
 
-    public void UpdateNode() {
-        if (Input.GetKey(KeyCode.A)) {
-            transform.position += Vector3.left * Time.deltaTime * Ninja.I.speed;
+    public void UpdateNode() {}
 
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            transform.position += Vector3.right * Time.deltaTime * Ninja.I.speed;
-        }
+    public void FixedUpdateNode() {
+        //ninja.MoveHorizontal();
     }
 
     public void ExitNode() {

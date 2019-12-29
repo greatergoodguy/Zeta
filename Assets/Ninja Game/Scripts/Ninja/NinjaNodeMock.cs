@@ -13,5 +13,7 @@ public class NinjaNodeMock : MonoBehaviour, NinjaNode_Base {
 
     public void UpdateNode() {}
 
+    public void FixedUpdateNode() {}
+
     public void ExitNode() {}
 }

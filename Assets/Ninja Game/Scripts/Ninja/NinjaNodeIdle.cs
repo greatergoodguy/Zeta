@@ -27,6 +27,9 @@ public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base {
         }
     }
 
+
+    public void FixedUpdateNode() {}
+
     public void ExitNode() {}
 
 }
