@@ -11,6 +11,9 @@ public class Ninja : MonoBehaviour {
 
     NinjaNode_Base ninjaNode;
 
+    public float speed = 5.0f;
+    public float jumpForce = 800;
+
     void Awake() {
         I = this;
     }
@@ -24,15 +27,18 @@ public class Ninja : MonoBehaviour {
     void Update() {
 
         ninjaNode.UpdateNode();
-        if (ninjaNode.IsNodeFinished()) {
-            ninjaNode.ExitNode();
-            Toolbox.Log(ninjaNode.GetType().Name + ": Exit");
-            ninjaNode = ninjaNode.GetNextNode();
-            ninjaNode.EnterNode();
-            Toolbox.Log(ninjaNode.GetType().Name + ": Enter");
-        }
 
         testAnimations();
+
+        if (Input.GetKeyDown(KeyCode.A)) {
+            // Face Left
+            transform.localScale = new Vector3(-1, 1, 1);
+
+        }
+        if (Input.GetKeyDown(KeyCode.D)) {
+            // Face Right
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     int i = 1;
@@ -45,9 +51,9 @@ public class Ninja : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.E)) {
             i = 1;
         }
-    
+
         if (Input.GetKeyDown(KeyCode.Alpha0)) {
-            animator.SetInteger("animation", i*10 + 0);
+            animator.SetInteger("animation", i * 10 + 0);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1)) {
             animator.SetInteger("animation", i * 10 + 1);
@@ -76,5 +82,22 @@ public class Ninja : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Alpha9)) {
             animator.SetInteger("animation", i * 10 + 9);
         }
+    }
+
+    public void SwitchNode(NinjaNode_Base _ninjaNode) {
+        ninjaNode.ExitNode();
+        Toolbox.Log(ninjaNode.GetType().Name + ": Exit");
+
+        ninjaNode = _ninjaNode;
+        ninjaNode.EnterNode();
+        Toolbox.Log(ninjaNode.GetType().Name + ": Enter");
+    }
+
+    public void SetAnimation(int animation) {
+        GetComponent<Animator>().SetInteger("animation", animation);
+    }
+
+    public Vector3 GetVelocity() {
+        return GetComponent<Rigidbody2D>().velocity;
     }
 }

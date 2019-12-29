@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base
-{
+public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base {
     public static NinjaNodeIdle I;
 
-    public Ninja ninja;
+    Ninja ninja;
 
     void Awake()
     {
@@ -15,22 +14,19 @@ public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base
 
     public void EnterNode() {
         ninja = Ninja.I;
-        //ninja.GetComponent<Animator>().SetInteger("animation", 1);
+        ninja.SetAnimation(0);
     }
 
     public void UpdateNode() {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
+            ninja.SwitchNode(NinjaNodeWalk.I);
+        }
+
+        if (Input.GetKey(KeyCode.Space)) {
+            ninja.SwitchNode(NinjaNodeJumpRise.I);
+        }
     }
 
-    public void ExitNode() {
-    }
-
-    public NinjaNode_Base GetNextNode() {
-        return NinjaNodeMock.I;
-    }
-
-    public bool IsNodeFinished()
-    {
-        return false;
-    }
+    public void ExitNode() {}
 
 }

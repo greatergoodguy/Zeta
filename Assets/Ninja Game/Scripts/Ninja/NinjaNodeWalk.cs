@@ -2,65 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeWalk : MonoBehaviour
-{
+public class NinjaNodeWalk : MonoBehaviour, NinjaNode_Base {
     public static NinjaNodeWalk I;
 
-    public float speed = 5.0f;
-    public float jumpForce = 500;
+    Ninja ninja;
 
-    bool canJump = true;
-
-    void Awake()
-    {
+    void Awake() {
         I = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            // Face Left
-            transform.localScale = new Vector3(-1, 1, 1);
+    public void EnterNode() {
+        ninja = Ninja.I;
+        ninja.SetAnimation(15);
+    }
+
+    public void UpdateNode() {
+        if (Input.GetKey(KeyCode.A)) {
+            transform.position += Vector3.left * Time.deltaTime * Ninja.I.speed;
 
         }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            // Face Right
-            transform.localScale = new Vector3(1, 1, 1);
+        if (Input.GetKey(KeyCode.D)) {
+            transform.position += Vector3.right * Time.deltaTime * Ninja.I.speed;
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            // Move Left
-            transform.position += Vector3.left * Time.deltaTime * speed;
-
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            // Move Right
-            transform.position += Vector3.right * Time.deltaTime * speed;
+        if (Input.GetKey(KeyCode.Space)) {
+            ninja.SwitchNode(NinjaNodeJumpRise.I);
         }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            jump();
+        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && ninja != null) {
+            ninja.SwitchNode(NinjaNodeIdle.I);
         }
     }
 
-    void jump()
-    {
-        if (canJump)
-        {
-            canJump = false;
-            GetComponent<Rigidbody2D>().AddForce(this.gameObject.transform.up * jumpForce);
-        }
+    public void ExitNode() {}
+
+    public NinjaNode_Base GetNextNode() {
+        return NinjaNodeMock.I;
     }
 
-    void OnCollisionEnter2D(Collision2D collidingObject)
-    {
-        canJump = true;
+    public bool IsNodeFinished() {
+        return false;
     }
-
 }
