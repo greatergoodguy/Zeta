@@ -27,7 +27,8 @@ public class CameraMan : MonoBehaviour {
         }
 
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        Vector3 newPosition = new Vector3((target.transform.position + offset).x, transform.position.y, transform.position.z);
+        float newPosX = Mathf.Min(Mathf.Max((target.transform.position + offset).x, -20f), 85f);
+        Vector3 newPosition = new Vector3(newPosX, transform.position.y, transform.position.z);
         transform.position = newPosition;
     }
 }

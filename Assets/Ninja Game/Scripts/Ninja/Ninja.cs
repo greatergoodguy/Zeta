@@ -118,14 +118,6 @@ public class Ninja : MonoBehaviour {
     }
 
     public void MoveHorizontal() {
-        //float xMovement = Input.GetAxis("Horizontal");
-        ////if (Math.Abs(_rigidbody2D.velocity.x) < horizontalMaxSpeed && Math.Abs(xMovement) > 0.9f) {
-        //if (Math.Abs(_rigidbody2D.velocity.x) < horizontalMaxSpeed) {
-        //    Vector2 movement = new Vector2(xMovement, 0);
-        //    Vector2 horizontalForce = horizontalMovementScalar * movement;
-        //    _rigidbody2D.AddForce(horizontalForce);
-        //}
-
         if (Math.Abs(_rigidbody2D.velocity.x) < horizontalMaxSpeed) {
             if (Input.GetKey(KeyCode.A)) {
                 Vector2 movement = new Vector2(-1, 0);
