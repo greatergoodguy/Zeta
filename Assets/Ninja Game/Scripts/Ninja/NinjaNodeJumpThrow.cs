@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
-    public static NinjaNodeJump I;
+public class NinjaNodeJumpThrow : MonoBehaviour, NinjaNode_Base {
+    public static NinjaNodeJumpThrow I;
 
     Ninja ninja;
 
@@ -11,21 +11,26 @@ public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
 
     bool isActive;
 
+    float elapsedTime;
+
     void Awake() {
         I = this;
     }
 
     public void EnterNode() {
         ninja = Ninja.I;
-        ninja.SetAnimation(9);
-        _rigidbody = ninja.GetComponent<Rigidbody2D>();
-        Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
-        _rigidbody.AddForce(jumpForce);
+        ninja.SetAnimation(11);
+        elapsedTime = 0;
         isActive = true;
+
+        ninja.ThrowShuriken();
     }
 
     public void UpdateNode() {
-        ninja.JumpThrowIfInput();
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime > 0.15f) {
+            ninja.SwitchNode(NinjaNodeFall.I);
+        }
     }
 
 
@@ -40,4 +45,5 @@ public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
             ninja.SwitchNode(NinjaNodeIdle.I);
         }
     }
+
 }

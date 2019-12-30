@@ -15,6 +15,7 @@ public class Ninja : MonoBehaviour {
     public float jumpForce = 800;
     public float horizontalMovementScalar = 500;
     public float horizontalMaxSpeed = 10;
+    public float shurikenHitSFXDelay = 0.25f;
 
     Rigidbody2D _rigidbody2D;
 
@@ -99,9 +100,25 @@ public class Ninja : MonoBehaviour {
         }
     }
 
+    public void JumpThrowIfInput() {
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            SwitchNode(NinjaNodeJumpThrow.I);
+        }
+    }
+
     public void CrouchIfInput() {
         if (Input.GetKey(KeyCode.S)) {
             SwitchNode(NinjaNodeCrouch.I);
         }
     }
+
+    public void ThrowShuriken() {
+        ActorSFXManager.I.Play(0);
+        Invoke("ShurikenHitSFX", shurikenHitSFXDelay);
+    }
+
+    void ShurikenHitSFX() {
+        ActorSFXManager.I.Play(1);
+    }
+
 }
