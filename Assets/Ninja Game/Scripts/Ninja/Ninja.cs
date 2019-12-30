@@ -89,7 +89,7 @@ public class Ninja : MonoBehaviour {
 
     public void JumpIfInput() {
         if (Input.GetKey(KeyCode.Space)) {
-            SwitchNode(NinjaNodeJumpRise.I);
+            SwitchNode(NinjaNodeJump.I);
         }
     }
 

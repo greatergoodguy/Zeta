@@ -9,8 +9,9 @@ public class NinjaNodeThrow : MonoBehaviour, NinjaNode_Base {
 
     float elapsedTime;
 
-    void Awake()
-    {
+    public float shurikenHitSFXDelay = 0.25f;
+
+    void Awake() {
         I = this;
     }
 
@@ -18,6 +19,12 @@ public class NinjaNodeThrow : MonoBehaviour, NinjaNode_Base {
         ninja = Ninja.I;
         ninja.SetAnimation(14);
         elapsedTime = 0;
+        ActorSFXManager.I.Play(0);
+        Invoke("ShurikenHitSFX", shurikenHitSFXDelay);
+    }
+
+    void ShurikenHitSFX() {
+        ActorSFXManager.I.Play(1);
     }
 
     public void UpdateNode() {
