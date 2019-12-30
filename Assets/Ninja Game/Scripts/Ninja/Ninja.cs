@@ -98,4 +98,10 @@ public class Ninja : MonoBehaviour {
             SwitchNode(NinjaNodeThrow.I);
         }
     }
+
+    public void CrouchIfInput() {
+        if (Input.GetKey(KeyCode.S)) {
+            SwitchNode(NinjaNodeCrouch.I);
+        }
+    }
 }
