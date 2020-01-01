@@ -18,6 +18,8 @@ public class NinjaNodeCrouch: MonoBehaviour, NinjaNode_Base {
     }
 
     public void UpdateNode() {
+        ninja.CrouchThrowIfInput();
+
         if (!Input.GetKey(KeyCode.S)) {
             ninja.SwitchNode(NinjaNodeIdle.I);
         }

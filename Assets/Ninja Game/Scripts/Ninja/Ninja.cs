@@ -112,6 +112,12 @@ public class Ninja : MonoBehaviour {
         }
     }
 
+    public void CrouchThrowIfInput() {
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            SwitchNode(NinjaNodeCrouchThrow.I);
+        }
+    }
+
     public void ThrowShuriken() {
         ActorSFXManager.I.Play(0);
         Invoke("ShurikenHitSFX", shurikenHitSFXDelay);
