@@ -24,7 +24,7 @@ public class EventSpeech : Event_Base {
 
     public override IEnumerator ProcessCoroutine() {
         float speechBubbleDuration = duration + 0.1f + dialogue.Length * TIME_BETWEEN_CHARACTERS;
-        goSpeech = Toolshed.AddSpeechBubble("Hello World", GetSpeechBubblePosition(), speechBubbleDuration);
+        goSpeech = Toolshed.AddSpeechBubble("Hello World", target.transform, speechBubbleDuration);
         AgentSpeechBubble agentSpeechBubble = goSpeech.GetComponent<AgentSpeechBubble>();
 
         string sentence = "";
@@ -47,11 +47,4 @@ public class EventSpeech : Event_Base {
     public override float GetDuration() { return duration; }
 
     public override bool IsSkippable() { return isSkippable; }
-
-    // =====================
-    // Virtual Methods
-    // =====================
-    protected virtual Vector3 GetSpeechBubblePosition() {
-        return Vector3.zero;
-    }
 }

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Toolshed {
 
-    public static GameObject AddSpeechBubble(string text, Vector3 spawnPos, float duration = 3.0f) {
+    public static GameObject AddSpeechBubble(string text, Transform target, float duration = 3.0f) {
+        Vector3 offset = new Vector3(0, 4f, 0);
+
         GameObject go = Toolbox.Create("Speech Bubble");
         AgentSpeechBubble agentSpeechBubble = go.GetComponent<AgentSpeechBubble>();
         agentSpeechBubble.SetText(text);
         GeneSuicide geneSuicide = go.AddComponent<GeneSuicide>();
         geneSuicide.SetDuration(duration);
-        go.transform.position = spawnPos;
+        go.transform.parent = target;
+        go.transform.localPosition = offset;
 
         return go;
     }
