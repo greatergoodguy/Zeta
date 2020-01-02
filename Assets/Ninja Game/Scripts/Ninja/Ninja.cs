@@ -20,6 +20,16 @@ public class Ninja : MonoBehaviour {
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidbody2D;
 
+    bool controlsEnabled = true;
+
+    public void EnableControls() {
+        controlsEnabled = true;
+    }
+
+    public void DisableControls() {
+        controlsEnabled = false;
+    }
+
     void Awake() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -36,13 +46,13 @@ public class Ninja : MonoBehaviour {
 
         ninjaNode.UpdateNode();
 
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.A) && controlsEnabled) {
             // Face Left
             //transform.localScale = new Vector3(-1, 1, 1);
             _spriteRenderer.flipX = true;
 
         }
-        if (Input.GetKeyDown(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.D) && controlsEnabled) {
             // Face Right
             //transform.localScale = new Vector3(1, 1, 1);
             _spriteRenderer.flipX = false;
@@ -79,12 +89,12 @@ public class Ninja : MonoBehaviour {
 
     public void MoveHorizontal() {
         if (Math.Abs(_rigidbody2D.velocity.x) < horizontalMaxSpeed) {
-            if (Input.GetKey(KeyCode.A)) {
+            if (Input.GetKey(KeyCode.A) && controlsEnabled) {
                 Vector2 movement = new Vector2(-1, 0);
                 Vector2 horizontalForce = horizontalMovementScalar * movement;
                 _rigidbody2D.AddForce(horizontalForce);
             }
-            if (Input.GetKey(KeyCode.D)) {
+            if (Input.GetKey(KeyCode.D) && controlsEnabled) {
                 Vector2 movement = new Vector2(1, 0);
                 Vector2 horizontalForce = horizontalMovementScalar * movement;
                 _rigidbody2D.AddForce(horizontalForce);
@@ -92,32 +102,38 @@ public class Ninja : MonoBehaviour {
         }
     }
 
+    public void WalkIfInput() {
+        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && controlsEnabled) {
+            SwitchNode(NinjaNodeWalk.I);
+        }
+    }
+
     public void JumpIfInput() {
-        if (Input.GetKey(KeyCode.Space)) {
+        if (Input.GetKey(KeyCode.Space) && controlsEnabled) {
             SwitchNode(NinjaNodeJump.I);
         }
     }
 
     public void ThrowIfInput() {
-        if (Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift) && controlsEnabled) {
             SwitchNode(NinjaNodeThrow.I);
         }
     }
 
     public void JumpThrowIfInput() {
-        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && controlsEnabled) {
             SwitchNode(NinjaNodeJumpThrow.I);
         }
     }
 
     public void CrouchIfInput() {
-        if (Input.GetKey(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S) && controlsEnabled) {
             SwitchNode(NinjaNodeCrouch.I);
         }
     }
 
     public void CrouchThrowIfInput() {
-        if (Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift) && controlsEnabled) {
             SwitchNode(NinjaNodeCrouchThrow.I);
         }
     }

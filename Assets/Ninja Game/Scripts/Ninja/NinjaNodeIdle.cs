@@ -21,11 +21,7 @@ public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base {
         ninja.JumpIfInput();
         ninja.ThrowIfInput();
         ninja.CrouchIfInput();
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
-            ninja.SwitchNode(NinjaNodeWalk.I);
-        }
-
+        ninja.WalkIfInput();
     }
 
     public void FixedUpdateNode() {}

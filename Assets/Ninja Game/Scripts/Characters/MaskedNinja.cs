@@ -29,11 +29,17 @@ public class MaskedNinja : MonoBehaviour {
 
     private void PlayCutscene() {
         shouldPlayCutscene = false;
+        AddEvent(Ninja.I.DisableControls);
         AddEvent(new EventSpeech(gameObject, "Hello World"));
         AddEvent(new EventSpeech(gameObject, "Goodbye World"));
+        AddEvent(Ninja.I.EnableControls);
     }
 
     void AddEvent(Event_Base _event) {
         ActorEventDispatcher.I.AddEvent(_event);
+    }
+
+    void AddEvent(Action action) {
+        ActorEventDispatcher.I.AddEvent(new EventAction(action));
     }
 }
