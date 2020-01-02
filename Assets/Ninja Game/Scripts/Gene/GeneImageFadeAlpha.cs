@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[RequireComponent(typeof(Image))]
 public class GeneFadeAlpha : MonoBehaviour {
 
     Image image;

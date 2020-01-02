@@ -17,9 +17,11 @@ public class Ninja : MonoBehaviour {
     public float horizontalMaxSpeed = 10;
     public float shurikenHitSFXDelay = 0.25f;
 
+    SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidbody2D;
 
     void Awake() {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         I = this;
     }
@@ -36,12 +38,14 @@ public class Ninja : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.A)) {
             // Face Left
-            transform.localScale = new Vector3(-1, 1, 1);
+            //transform.localScale = new Vector3(-1, 1, 1);
+            _spriteRenderer.flipX = true;
 
         }
         if (Input.GetKeyDown(KeyCode.D)) {
             // Face Right
-            transform.localScale = new Vector3(1, 1, 1);
+            //transform.localScale = new Vector3(1, 1, 1);
+            _spriteRenderer.flipX = false;
         }
 
         if(transform.position.y < -10) {
@@ -101,7 +105,7 @@ public class Ninja : MonoBehaviour {
     }
 
     public void JumpThrowIfInput() {
-        if (Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
             SwitchNode(NinjaNodeJumpThrow.I);
         }
     }

@@ -1,0 +1,1 @@
+Genes are scripts that can be added to another object at anytime, even runtime. There may be pre-requisites as to what is required to add that gene. For example the Fade Gene requires an image attached to the game object.

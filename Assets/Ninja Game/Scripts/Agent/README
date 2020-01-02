@@ -1,0 +1,1 @@
+Agents are scripts that are necessary for a prefab to function. Each agent should be tightly coupled to a prefab.
