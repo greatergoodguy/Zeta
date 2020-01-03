@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(SetiMock))]
+[RequireComponent(typeof(SetiSetup))]
+[RequireComponent(typeof(SetiTitle))]
+[RequireComponent(typeof(SetiGame))]
+[RequireComponent(typeof(SetiPause))]
 public class _MasterScript : MonoBehaviour {
 
     public static _MasterScript I;

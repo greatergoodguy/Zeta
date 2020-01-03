@@ -11,6 +11,6 @@ public class SetiSetup : SeTi_Base {
     }
 
     public override void Enter() {
-        SwitchSeason(SetiTitleScreen.I);
+        SwitchSeason(SetiTitle.I);
     }
 }

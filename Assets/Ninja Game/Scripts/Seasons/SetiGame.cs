@@ -14,10 +14,16 @@ public class SetiGame: SeTi_Base {
     // Overridden 
     // ==================
     public override void Enter() {
-        ActorMusicManager.I.PlayInstant(0);
+        //ActorMusicManager.I.PlayInstant(0);
 
         Ninja.I.EnableControls();
         Time.timeScale = 1;
+    }
+
+    public override void UpdateSeason() {
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            SwitchSeason(SetiPause.I);
+        }
     }
 
     public override void Exit() {

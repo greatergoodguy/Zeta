@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetiTitleScreen : SeTi_Base {
+public class SetiTitle : SeTi_Base {
 
-    public static SetiTitleScreen I;
+    public static SetiTitle I;
 
     ActorTitleScreen titleScreen;
 
