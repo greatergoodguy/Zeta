@@ -7,6 +7,7 @@ public class SetiTitle : SeTi_Base {
     public static SetiTitle I;
 
     ActorTitleScreen titleScreen;
+    ActorWidgets widgets;
 
     void Awake() {
         I = this;
@@ -17,10 +18,11 @@ public class SetiTitle : SeTi_Base {
     // ==================
     public override void Enter() {
         titleScreen = ActorTitleScreen.I;
+        widgets = ActorWidgets.I;
 
         titleScreen.ShowPanel();
+        titleScreen.EnableUI();
         Ninja.I.DisableControls();
-        Time.timeScale = 0;
     }
 
     public override void Exit() {
@@ -28,6 +30,8 @@ public class SetiTitle : SeTi_Base {
     }
 
     public void StartGame() {
-        SwitchSeason(SetiCutsceneIntro.I);
+        widgets.FadeOut(() => {
+            SwitchSeason(SetiCutsceneIntro.I);
+        }, 3.0f);
     }
 }

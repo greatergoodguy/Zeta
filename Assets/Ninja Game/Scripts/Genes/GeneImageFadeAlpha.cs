@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent(typeof(Image))]
-public class GeneFadeAlpha : MonoBehaviour {
+public class GeneImageFadeAlpha : MonoBehaviour {
 
     Image image;
 
@@ -20,11 +20,6 @@ public class GeneFadeAlpha : MonoBehaviour {
 
     void Awake() {
         image = GetComponent<Image>();
-    }
-
-    // Use this for initialization
-    void Start() {
-
     }
 
     // Update is called once per frame
