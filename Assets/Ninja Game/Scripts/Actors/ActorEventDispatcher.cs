@@ -19,7 +19,7 @@ public class ActorEventDispatcher : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightShift)) {
             ButtonFullScreen();
         }
     }

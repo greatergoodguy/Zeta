@@ -28,6 +28,6 @@ public class SetiTitle : SeTi_Base {
     }
 
     public void StartGame() {
-        SwitchSeason(SetiGame.I);
+        SwitchSeason(SetiCutsceneIntro.I);
     }
 }
