@@ -116,7 +116,7 @@ public class Ninja : MonoBehaviour {
 
     public void ThrowIfInput() {
         if (Input.GetKey(KeyCode.LeftShift) && controlsEnabled) {
-            SwitchNode(NinjaNodeThrow.I);
+            Throw();
         }
     }
 
@@ -124,6 +124,10 @@ public class Ninja : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift) && controlsEnabled) {
             SwitchNode(NinjaNodeJumpThrow.I);
         }
+    }
+
+    public void Throw() {
+        SwitchNode(NinjaNodeThrow.I);
     }
 
     public void CrouchIfInput() {

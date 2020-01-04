@@ -7,6 +7,7 @@ public class SetiCutsceneIntro : SeTi_Base {
 
     public static SetiCutsceneIntro I;
 
+    ActorMusicManager musicManager;
     ActorWidgets widgets;
 
     Ninja kunoichi;
@@ -20,21 +21,29 @@ public class SetiCutsceneIntro : SeTi_Base {
     // Overridden 
     // ==================
     public override void Enter() {
-        //ActorMusicManager.I.PlayInstant(0);
         Time.timeScale = 1;
 
+        musicManager = ActorMusicManager.I;
         widgets = ActorWidgets.I;
 
         kunoichi = Ninja.I;
         maskedNinja = MaskedNinja.I;
 
-        //AddEvent(
-        AddEvent(EventFadeIn.I);
-        AddEvent(new EventSpeech(kunoichi.gameObject, "Hello World"));
-        AddEvent(new EventSpeech(kunoichi.gameObject, "Goodbye World"));
-        AddEvent(new EventSpeech(maskedNinja.gameObject, "Hello World"));
-        AddEvent(new EventSpeech(maskedNinja.gameObject, "Goodbye World"));
-        AddEvent(new EventSetNinjaAnimation(maskedNinja.gameObject, Constants.NINJA_ANIMATION_RUN));
+        musicManager.Play(2);
+
+        kunoichi.DisableControls();
+        widgets.FadeIn();
+        AddEvent(new EventPause(1.0f));
+        AddEvent(kunoichi.Throw);
+        AddEvent(new EventPause(1.0f));
+        AddEvent(kunoichi.Throw);
+        AddEvent(new EventPause(1.0f));
+        AddEvent(kunoichi.Throw);
+        //AddEvent(new EventSpeech(kunoichi.gameObject, "Hello World"));
+        //AddEvent(new EventSpeech(kunoichi.gameObject, "Goodbye World"));
+        //AddEvent(new EventSpeech(maskedNinja.gameObject, "Hello World"));
+        //AddEvent(new EventSpeech(maskedNinja.gameObject, "Goodbye World"));
+        //AddEvent(new EventSetNinjaAnimation(maskedNinja.gameObject, Constants.NINJA_ANIMATION_RUN));
     }
 
     public override void UpdateSeason() {
@@ -52,7 +61,7 @@ public class SetiCutsceneIntro : SeTi_Base {
         ActorEventDispatcher.I.AddEvent(_event);
     }
 
-    void AddEvent(Action action) {
+    void AddEvent(Action action, float duration = EventAction.DEFAULT_DURATION) {
         ActorEventDispatcher.I.AddEvent(new EventAction(action));
     }
 }

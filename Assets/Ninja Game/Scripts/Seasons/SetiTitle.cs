@@ -8,6 +8,7 @@ public class SetiTitle : SeTi_Base {
 
     ActorTitleScreen titleScreen;
     ActorWidgets widgets;
+    ActorMusicManager musicManager;
 
     void Awake() {
         I = this;
@@ -19,9 +20,11 @@ public class SetiTitle : SeTi_Base {
     public override void Enter() {
         titleScreen = ActorTitleScreen.I;
         widgets = ActorWidgets.I;
+        musicManager = ActorMusicManager.I;
 
         titleScreen.ShowPanel();
         titleScreen.EnableUI();
+        musicManager.Play(1);
         Ninja.I.DisableControls();
     }
 
@@ -30,6 +33,7 @@ public class SetiTitle : SeTi_Base {
     }
 
     public void StartGame() {
+        musicManager.Stop();
         widgets.FadeOut(() => {
             SwitchSeason(SetiCutsceneIntro.I);
         });

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActorMusicManager : MonoBehaviour {
 
     /*
-	 * 0 - 
+	 * 0 - Ninja Tune
 	 * 1 - 
 	 * 2 - 
 	 * 3 - 
@@ -22,6 +22,8 @@ public class ActorMusicManager : MonoBehaviour {
 
     public static ActorMusicManager I;
 
+    private const float DEFAULT_FADE_DURATION = 3.0f;
+
     AudioSource[] audioClips;
     AudioSource activeAudioClip;
 
@@ -37,7 +39,7 @@ public class ActorMusicManager : MonoBehaviour {
         activeAudioClip.Play();
     }
 
-    public void Play(int index, float startVolume = 0.0f, float endVolume = 1.0f, float fadeDuration = 5.0f, float startTimestamp = 0.0f) {
+    public void Play(int index, float startVolume = 0.0f, float endVolume = 1.0f, float fadeDuration = DEFAULT_FADE_DURATION, float startTimestamp = 0.0f) {
         if (index < 0 || index >= audioClips.Length) {
             Toolbox.Log("Play(int index): invalid index");
             return;
@@ -57,7 +59,7 @@ public class ActorMusicManager : MonoBehaviour {
         audioClips[index].volume = volume;
     }
 
-    private IEnumerator PlayAsync(AudioSource audioSource, float startVolume, float endVolume, float fadeDuration = 5.0f, float startTimestamp = 0.0f) {
+    private IEnumerator PlayAsync(AudioSource audioSource, float startVolume, float endVolume, float fadeDuration = DEFAULT_FADE_DURATION, float startTimestamp = 0.0f) {
         float volumeDifference = endVolume - startVolume;
         audioSource.volume = startVolume;
         audioSource.Play();
@@ -77,7 +79,7 @@ public class ActorMusicManager : MonoBehaviour {
         activeAudioClip.Stop();
     }
 
-    public void Stop(float fadeDuration = 5.0f) {
+    public void Stop(float fadeDuration = DEFAULT_FADE_DURATION) {
         if (activeAudioClip == null) {
             Toolbox.Log("Stop(): activeAudioClip is null");
             return;
@@ -87,7 +89,7 @@ public class ActorMusicManager : MonoBehaviour {
         StartCoroutine(StopAsync(activeAudioClip, fadeDuration));
     }
 
-    private IEnumerator StopAsync(AudioSource audioSource, float fadeDuration = 5.0f) {
+    private IEnumerator StopAsync(AudioSource audioSource, float fadeDuration = DEFAULT_FADE_DURATION) {
         float volumeDifference = audioSource.volume;
         while (audioSource.volume > 0.001f) {
             audioSource.volume -= volumeDifference * Time.deltaTime / fadeDuration;

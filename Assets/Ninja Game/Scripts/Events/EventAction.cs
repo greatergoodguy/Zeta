@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EventAction : Event_Base {
 
-    const float DEFAULT_DURATION = 0.01f;
+    public const float DEFAULT_DURATION = 0.01f;
 
     Action action;
     float duration;
