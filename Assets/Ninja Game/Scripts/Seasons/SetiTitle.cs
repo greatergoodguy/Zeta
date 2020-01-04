@@ -32,6 +32,6 @@ public class SetiTitle : SeTi_Base {
     public void StartGame() {
         widgets.FadeOut(() => {
             SwitchSeason(SetiCutsceneIntro.I);
-        }, 3.0f);
+        });
     }
 }

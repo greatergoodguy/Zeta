@@ -7,6 +7,8 @@ public class SetiCutsceneIntro : SeTi_Base {
 
     public static SetiCutsceneIntro I;
 
+    ActorWidgets widgets;
+
     Ninja kunoichi;
     MaskedNinja maskedNinja;
 
@@ -21,9 +23,13 @@ public class SetiCutsceneIntro : SeTi_Base {
         //ActorMusicManager.I.PlayInstant(0);
         Time.timeScale = 1;
 
+        widgets = ActorWidgets.I;
+
         kunoichi = Ninja.I;
         maskedNinja = MaskedNinja.I;
 
+        //AddEvent(
+        AddEvent(EventFadeIn.I);
         AddEvent(new EventSpeech(kunoichi.gameObject, "Hello World"));
         AddEvent(new EventSpeech(kunoichi.gameObject, "Goodbye World"));
         AddEvent(new EventSpeech(maskedNinja.gameObject, "Hello World"));
