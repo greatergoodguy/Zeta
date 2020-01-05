@@ -48,13 +48,11 @@ public class Ninja : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.A) && controlsEnabled) {
             // Face Left
-            //transform.localScale = new Vector3(-1, 1, 1);
             _spriteRenderer.flipX = true;
 
         }
         if (Input.GetKeyDown(KeyCode.D) && controlsEnabled) {
             // Face Right
-            //transform.localScale = new Vector3(1, 1, 1);
             _spriteRenderer.flipX = false;
         }
 
@@ -144,11 +142,23 @@ public class Ninja : MonoBehaviour {
 
     public void ThrowShuriken() {
         ActorSFXManager.I.Play(0);
-        Invoke("ShurikenHitSFX", shurikenHitSFXDelay);
+
+        GameObject goShuriken = Toolbox.Create("Shuriken");
+        goShuriken.transform.position = transform.position;
+        AgentShuriken shuriken = goShuriken.GetComponent<AgentShuriken>();
+        
+        if(isFacingLeft()) {
+            shuriken.LaunchLeft();
+        } else {
+            shuriken.LaunchRight();
+        }
     }
 
     void ShurikenHitSFX() {
         ActorSFXManager.I.Play(1);
     }
 
+    bool isFacingLeft() {
+        return _spriteRenderer.flipX == true;
+    }
 }
