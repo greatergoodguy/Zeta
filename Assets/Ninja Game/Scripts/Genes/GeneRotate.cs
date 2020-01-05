@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneRotate: MonoBehaviour {
-    private const float DEFAULT_SPEED = 500.0f;
+    private const float DEFAULT_SPEED = 1500.0f;
 
 	public float speed = DEFAULT_SPEED;
     public bool isClockwise;

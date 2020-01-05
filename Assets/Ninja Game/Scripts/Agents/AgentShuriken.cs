@@ -40,4 +40,13 @@ public class AgentShuriken : MonoBehaviour {
         geneSuicide = gameObject.AddComponent<GeneSuicide>();
         geneSuicide.SetDuration(10.0f);
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        Toolbox.Log("OnTriggerEnter2D");
+        if (other.tag == "Flesh") {
+            Destroy(geneRotate);
+            Destroy(geneTranslate);
+            Destroy(geneSuicide);
+        }
+    }
 }
