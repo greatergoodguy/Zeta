@@ -118,7 +118,7 @@ public class Ninja : MonoBehaviour {
     }
 
     public void ThrowIfInput() {
-        if (Input.GetKey(KeyCode.LeftShift) && controlsEnabled) {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && controlsEnabled) {
             Throw();
         }
     }

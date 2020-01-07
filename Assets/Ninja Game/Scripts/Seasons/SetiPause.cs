@@ -28,7 +28,7 @@ public class SetiPause : SeTi_Base {
     }
 
     public void ResumeGame() {
-        SwitchSeason(SetiGame.I);
+        SwitchSeason(SetiStage1.I);
     }
 
     public void QuitGame() {

@@ -1,5 +1,5 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public abstract class SeTi_Base : MonoBehaviour {
@@ -12,4 +12,14 @@ public abstract class SeTi_Base : MonoBehaviour {
         _MasterScript.I.SwitchSeason(newSeason);
     }
 
+    // ==================
+    // Event Helpers
+    // ==================
+    protected void AddEvent(Event_Base _event) {
+        ActorEventDispatcher.I.AddEvent(_event);
+    }
+
+    protected void AddEvent(Action action, float duration = EventAction.DEFAULT_DURATION) {
+        ActorEventDispatcher.I.AddEvent(new EventAction(action));
+    }
 }

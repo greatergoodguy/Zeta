@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GeneTranslate : MonoBehaviour {
 
-    public const float DEFAULT_SPEED = 20.0f;
+    public const float DEFAULT_SPEED = 30.0f;
 
     public Vector3 direction = Vector3.right;
     public float speed = DEFAULT_SPEED;

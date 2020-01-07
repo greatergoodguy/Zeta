@@ -46,11 +46,7 @@ public class SetiCutsceneIntro : SeTi_Base {
         AddEvent(new EventPause(1.0f));
         AddEvent(new EventSpeech(kunoichi.gameObject, "I'm on a roll today!"));
         AddEvent(new EventSpeech(kunoichi.gameObject, "Almost time to leave. I'll get 3 more in a row before I go.", EventSpeech.DURATION_LONG));
-        AddEvent(SwitchSeasonGame);
-        
-        //AddEvent(new EventSpeech(maskedNinja.gameObject, "Hello World"));
-        //AddEvent(new EventSpeech(maskedNinja.gameObject, "Goodbye World"));
-        //AddEvent(new EventSetNinjaAnimation(maskedNinja.gameObject, Constants.NINJA_ANIMATION_RUN));
+        AddEvent(SwitchSeasonStage1);
     }
 
     public override void UpdateSeason() {
@@ -60,19 +56,7 @@ public class SetiCutsceneIntro : SeTi_Base {
        
     }
 
-    void SwitchSeasonGame() {
-        SwitchSeason(SetiGame.I);
-    }
-
-
-    // ==================
-    // Event Helpers
-    // ==================
-    void AddEvent(Event_Base _event) {
-        ActorEventDispatcher.I.AddEvent(_event);
-    }
-
-    void AddEvent(Action action, float duration = EventAction.DEFAULT_DURATION) {
-        ActorEventDispatcher.I.AddEvent(new EventAction(action));
+    void SwitchSeasonStage1() {
+        SwitchSeason(SetiStage1.I);
     }
 }

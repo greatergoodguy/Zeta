@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage1Targets : MonoBehaviour {
+public class Stage1Target : MonoBehaviour {
+
+    Stage1 stage1;
+
     // Start is called before the first frame update
     void Start() {
-
+        stage1 = Stage1.I;
     }
 
     // Update is called once per frame
@@ -14,9 +17,8 @@ public class Stage1Targets : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Toolbox.Log("OnTriggerEnter2D");
-        //if (other.tag == "Flesh") {
-
-        //}
+        if (other.tag == "Shuriken") {
+            stage1.OnTargetHit();
+        }
     }
 }

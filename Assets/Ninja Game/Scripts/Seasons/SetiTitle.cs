@@ -26,6 +26,7 @@ public class SetiTitle : SeTi_Base {
         titleScreen.EnableUI();
         musicManager.Play(1);
         Ninja.I.DisableControls();
+        Time.timeScale = 1;
     }
 
     public override void Exit() {
