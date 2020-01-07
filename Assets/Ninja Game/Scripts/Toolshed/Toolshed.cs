@@ -5,7 +5,7 @@ using UnityEngine;
 public class Toolshed {
 
     public static GameObject AddSpeechBubble(string text, Transform target, float duration = 3.0f) {
-        Vector3 offset = new Vector3(0.91f, 4f, 0);
+        Vector3 offset = new Vector3(0.01f, 4f, 0);
 
         GameObject go = Toolbox.Create("Speech Bubble");
         AgentSpeechBubble agentSpeechBubble = go.GetComponent<AgentSpeechBubble>();

@@ -36,11 +36,18 @@ public class SetiCutsceneIntro : SeTi_Base {
         AddEvent(new EventPause(1.0f));
         AddEvent(kunoichi.Throw);
         AddEvent(new EventPause(1.0f));
+        AddEvent(kunoichi.FaceLeft);
+        AddEvent(new EventPause(0.5f));
         AddEvent(kunoichi.Throw);
         AddEvent(new EventPause(1.0f));
+        AddEvent(kunoichi.FaceRight);
+        AddEvent(new EventPause(0.5f));
         AddEvent(kunoichi.Throw);
-        //AddEvent(new EventSpeech(kunoichi.gameObject, "Hello World"));
-        //AddEvent(new EventSpeech(kunoichi.gameObject, "Goodbye World"));
+        AddEvent(new EventPause(1.0f));
+        AddEvent(new EventSpeech(kunoichi.gameObject, "I'm on a roll today!"));
+        AddEvent(new EventSpeech(kunoichi.gameObject, "Almost time to leave. I'll get 3 more in a row before I go.", EventSpeech.DURATION_LONG));
+        AddEvent(SwitchSeasonGame);
+        
         //AddEvent(new EventSpeech(maskedNinja.gameObject, "Hello World"));
         //AddEvent(new EventSpeech(maskedNinja.gameObject, "Goodbye World"));
         //AddEvent(new EventSetNinjaAnimation(maskedNinja.gameObject, Constants.NINJA_ANIMATION_RUN));
@@ -51,6 +58,10 @@ public class SetiCutsceneIntro : SeTi_Base {
 
     public override void Exit() {
        
+    }
+
+    void SwitchSeasonGame() {
+        SwitchSeason(SetiGame.I);
     }
 
 

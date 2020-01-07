@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EventSpeech : Event_Base {
 
-    public const float DURATION_SHORT = 2.2f;
-    public const float DURATION_NORMAL = 3.0f;
+    public const float DURATION_SHORT = 1.0f;
+    public const float DURATION_NORMAL = 2.0f;
+    public const float DURATION_LONG = 5.0f;
     public const float TIME_BETWEEN_CHARACTERS = 0.01f;
 
     GameObject target;

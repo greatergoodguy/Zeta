@@ -5,6 +5,7 @@ using UnityEngine;
 public class AgentShuriken : MonoBehaviour {
 
     GameObject goSprite;
+    SpriteRenderer spriteRenderer;
 
     GeneRotate geneRotate;
     GeneTranslate geneTranslate;
@@ -12,6 +13,7 @@ public class AgentShuriken : MonoBehaviour {
 
     void Awake() {
         goSprite = transform.Find("Sprite").gameObject;
+        spriteRenderer = goSprite.GetComponent<SpriteRenderer>();
     }
 
     public void LaunchLeft() {
@@ -44,9 +46,20 @@ public class AgentShuriken : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         Toolbox.Log("OnTriggerEnter2D");
         if (other.tag == "Flesh") {
+            ShurikenHitSFX();
+
             Destroy(geneRotate);
             Destroy(geneTranslate);
             Destroy(geneSuicide);
+
+            SpriteRenderer otherSpriteRenderer = other.GetComponent<SpriteRenderer>();
+            if(otherSpriteRenderer != null) {
+                spriteRenderer.sortingOrder = otherSpriteRenderer.sortingOrder;
+            }
         }
+    }
+
+    void ShurikenHitSFX() {
+        ActorSFXManager.I.Play(1);
     }
 }

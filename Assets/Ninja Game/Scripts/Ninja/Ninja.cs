@@ -47,19 +47,24 @@ public class Ninja : MonoBehaviour {
         ninjaNode.UpdateNode();
 
         if (Input.GetKeyDown(KeyCode.A) && controlsEnabled) {
-            // Face Left
-            _spriteRenderer.flipX = true;
-
+            FaceLeft();
         }
         if (Input.GetKeyDown(KeyCode.D) && controlsEnabled) {
-            // Face Right
-            _spriteRenderer.flipX = false;
+            FaceRight();
         }
 
         if(transform.position.y < -10) {
             Vector3 newPosition = new Vector3(transform.position.x, 15, transform.position.z);
             transform.position = newPosition;
         }
+    }
+
+    public void FaceLeft() {
+        _spriteRenderer.flipX = true;
+    }
+
+    public void FaceRight() {
+        _spriteRenderer.flipX = false;
     }
 
     void FixedUpdate() {
@@ -152,10 +157,6 @@ public class Ninja : MonoBehaviour {
         } else {
             shuriken.LaunchRight();
         }
-    }
-
-    void ShurikenHitSFX() {
-        ActorSFXManager.I.Play(1);
     }
 
     bool isFacingLeft() {
