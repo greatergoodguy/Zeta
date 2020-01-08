@@ -52,6 +52,8 @@ public class AgentShuriken : MonoBehaviour {
             Destroy(geneTranslate);
             Destroy(geneSuicide);
 
+            transform.parent = other.transform;
+
             SpriteRenderer otherSpriteRenderer = other.GetComponent<SpriteRenderer>();
             if(otherSpriteRenderer != null) {
                 spriteRenderer.sortingOrder = otherSpriteRenderer.sortingOrder;

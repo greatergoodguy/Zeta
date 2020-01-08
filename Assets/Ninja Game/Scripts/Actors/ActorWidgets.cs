@@ -46,7 +46,6 @@ public class ActorWidgets : MonoBehaviour {
         goBlack.SetActive(true);
         yield return new WaitForSeconds(duration);
         goScreenBlocker.SetActive(false);
-        goBlack.SetActive(false);
         actionOnFinish.Invoke();
     }
 }

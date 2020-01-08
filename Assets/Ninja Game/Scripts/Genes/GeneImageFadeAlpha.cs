@@ -12,14 +12,22 @@ public class GeneImageFadeAlpha : MonoBehaviour {
     float alphaEnd = 1.0f;
     float elapsedTime;
 
+
+    void Awake() {
+        image = GetComponent<Image>();
+    }
+
     public void Init(float duration, float alphaStart, float alphaEnd) {
         this.duration = duration;
         this.alphaStart = alphaStart;
         this.alphaEnd = alphaEnd;
-    }
 
-    void Awake() {
-        image = GetComponent<Image>();
+        if(image == null) {
+            image = GetComponent<Image>();
+        }
+        Color tempColor = image.color;
+        tempColor.a = alphaStart;
+        image.color = tempColor;
     }
 
     // Update is called once per frame

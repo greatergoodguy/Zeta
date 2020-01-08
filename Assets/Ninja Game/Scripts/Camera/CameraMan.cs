@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class CameraMan : MonoBehaviour {
 
+    public static CameraMan I;
+
     public GameObject target;        //Public variable to store a reference to the player game object
 
     private Vector3 offset;            //Private variable to store the offset distance between the player and camera
+
+    private void Awake() {
+        I = this;
+    }
 
     // Use this for initialization
     void Start() {
