@@ -8,35 +8,43 @@ public class GameInputForCutscene : GameInput_Base {
 
     private GameInputForCutscene() {}
 
+    public bool _KeyDownForLeft { get; set; }
     public override bool KeyDownForLeft() {
-        return false;
+        return _KeyDownForLeft;
     }
 
+    public bool _KeyForLeft { get; set; }
     public override bool KeyForLeft() {
-        return false;
+        return _KeyForLeft;
     }
 
+    public bool _KeyDownForRight { get; set; }
     public override bool KeyDownForRight() {
-        return false;
+        return _KeyDownForRight;
     }
 
+    public bool _KeyForRight { get; set; }
     public override bool KeyForRight() {
-        return false;
+        return _KeyForRight;
     }
 
+    public bool _KeyForCrouch { get; set; }
     public override bool KeyForCrouch() {
-        return false;
+        return _KeyForCrouch;
     }
 
+    public bool _KeyDownForJump { get; set; }
     public override bool KeyDownForJump() {
-        return false;
+        return _KeyDownForJump;
     }
 
+    public bool _KeyForJump { get; set; }
     public override bool KeyForJump() {
-        return false;
+        return _KeyForJump;
     }
 
+    public bool _KeyDownForThrow { get; set; }
     public override bool KeyDownForThrow() {
-        return false;
+        return _KeyDownForThrow;
     }
 }

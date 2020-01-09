@@ -29,10 +29,10 @@ public class MaskedNinjaDialogue1 : MonoBehaviour {
 
     private void PlayCutscene() {
         shouldPlayCutscene = false;
-        AddEvent(Ninja.I.DisableControls);
+        AddEvent(Ninja.I.DisableGameInput);
         AddEvent(new EventSpeech(gameObject, "Hello World"));
         AddEvent(new EventSpeech(gameObject, "Goodbye World"));
-        AddEvent(Ninja.I.EnableControls);
+        AddEvent(Ninja.I.EnableGameInputForUser);
     }
 
     void AddEvent(Event_Base _event) {

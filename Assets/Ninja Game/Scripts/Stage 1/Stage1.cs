@@ -7,6 +7,7 @@ public class Stage1 : MonoBehaviour {
 
     public static Stage1 I;
 
+    GameInputForCutscene gameInputForCutscene;
     ActorWidgets widgets;
     Ninja kunoichi;
 
@@ -32,6 +33,7 @@ public class Stage1 : MonoBehaviour {
     }
 
     public void EnableStage() {
+        gameInputForCutscene = GameInputForCutscene.I;
         widgets = ActorWidgets.I;
         kunoichi = Ninja.I;
         isActive = true;
@@ -60,8 +62,8 @@ public class Stage1 : MonoBehaviour {
 
         if (targetHitCounter == 3) {
             DestroyTriggersPart1();
-            AddEvent(new EventSpeech(kunoichi.gameObject, "And the savior of the world is.... KYTE!!!!"));
-            AddEvent(new EventSpeech(kunoichi.gameObject, "Alright, school's bout to start. Time to bounce."));
+            this.AddEvent(new EventSpeech(kunoichi.gameObject, "And the savior of the world is.... KYTE!!!!"));
+            this.AddEvent(new EventSpeech(kunoichi.gameObject, "Alright, school's bout to start. Time to bounce."));
         }
     }
 
@@ -71,8 +73,8 @@ public class Stage1 : MonoBehaviour {
         }
 
         DestroyTriggersPart1();
-        AddEvent(new EventSpeech(kunoichi.gameObject, "I don't need anymore practice."));
-        AddEvent(new EventSpeech(kunoichi.gameObject, "Besides... this is the perfect \"running to school\" weather."));
+        this.AddEvent(new EventSpeech(kunoichi.gameObject, "I don't need anymore practice."));
+        this.AddEvent(new EventSpeech(kunoichi.gameObject, "Besides... this is the perfect \"running to school\" weather."));
     }
 
     public void OnTransitionToTemple() {
@@ -80,14 +82,14 @@ public class Stage1 : MonoBehaviour {
             return;
         }
 
-        AddEvent(kunoichi.DisableControls);
-        AddEvent(EventFadeOut.I);
-        AddEvent(() => {
+        this.AddEvent(kunoichi.DisableGameInput);
+        this.AddEvent(EventFadeOut.I);
+        this.AddEvent(() => {
             goEnvironment1.SetActive(false);
             goEnvironment2.SetActive(true);
         });
-        AddEvent(EventFadeIn.I);
-        AddEvent(kunoichi.EnableControls);
+        this.AddEvent(EventFadeIn.I);
+        this.AddEvent(kunoichi.EnableGameInputForUser);
     }
 
     public void OnTransitionToKytesHouse() {
@@ -95,30 +97,19 @@ public class Stage1 : MonoBehaviour {
             return;
         }
 
-        AddEvent(kunoichi.DisableControls);
-        AddEvent(EventFadeOut.I);
-        AddEvent(() => {
+        this.AddEvent(kunoichi.DisableGameInput);
+        this.AddEvent(EventFadeOut.I);
+        this.AddEvent(() => {
             goEnvironment1.SetActive(true);
             goEnvironment2.SetActive(false);
         });
-        AddEvent(EventFadeIn.I);
-        AddEvent(kunoichi.EnableControls);
+        this.AddEvent(EventFadeIn.I);
+        this.AddEvent(kunoichi.EnableGameInputForUser);
     }
 
     void DestroyTriggersPart1() {
         Destroy(goTarget1.GetComponent<Stage1Target>());
         Destroy(goTarget2.GetComponent<Stage1Target>());
         Destroy(goSkipTarget.GetComponent<Stage1SkipTarget>());
-    }
-
-    // ==================
-    // Event Helpers
-    // ==================
-    protected void AddEvent(Event_Base _event) {
-        ActorEventDispatcher.I.AddEvent(_event);
-    }
-
-    protected void AddEvent(Action action, float duration = EventAction.DEFAULT_DURATION) {
-        ActorEventDispatcher.I.AddEvent(new EventAction(action, duration));
     }
 }

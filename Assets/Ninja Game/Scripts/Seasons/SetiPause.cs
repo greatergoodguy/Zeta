@@ -19,7 +19,7 @@ public class SetiPause : SeTi_Base {
         actorPauseScreen = ActorPauseScreen.I;
 
         actorPauseScreen.ShowPanel();
-        Ninja.I.DisableControls();
+        Ninja.I.DisableGameInput();
         Time.timeScale = 0;
     }
 

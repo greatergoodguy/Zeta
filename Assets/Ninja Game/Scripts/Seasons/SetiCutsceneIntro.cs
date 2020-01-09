@@ -31,7 +31,7 @@ public class SetiCutsceneIntro : SeTi_Base {
 
         musicManager.Play(2);
 
-        kunoichi.DisableControls();
+        kunoichi.DisableGameInput();
         widgets.FadeIn();
         AddEvent(new EventPause(1.0f));
         AddEvent(kunoichi.Throw);

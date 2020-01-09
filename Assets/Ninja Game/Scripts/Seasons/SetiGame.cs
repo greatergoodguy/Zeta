@@ -16,7 +16,7 @@ public class SetiGame: SeTi_Base {
     public override void Enter() {
         //ActorMusicManager.I.PlayInstant(0);
 
-        Ninja.I.EnableControls();
+        Ninja.I.EnableGameInputForUser();
         Time.timeScale = 1;
     }
 

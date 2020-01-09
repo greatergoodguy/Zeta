@@ -59,12 +59,16 @@ public class Ninja : MonoBehaviour {
         }
     }
 
-    public void EnableControls() {
-        gameInput = GameInputForUser.I;
+    public void SetGameInput(GameInput_Base _gameInput) {
+        gameInput = _gameInput;
     }
 
-    public void DisableControls() {
-        gameInput = GameInputMock.I;
+    public void EnableGameInputForUser() {
+        SetGameInput(GameInputForUser.I);
+    }
+
+    public void DisableGameInput() {
+        SetGameInput(GameInputMock.I);
     }
 
     public void FaceLeft() {

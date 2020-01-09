@@ -25,7 +25,7 @@ public class SetiTitle : SeTi_Base {
         titleScreen.ShowPanel();
         titleScreen.EnableUI();
         musicManager.Play(1);
-        Ninja.I.DisableControls();
+        Ninja.I.DisableGameInput();
         Time.timeScale = 1;
     }
 

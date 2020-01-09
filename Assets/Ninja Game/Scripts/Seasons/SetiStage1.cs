@@ -21,7 +21,7 @@ public class SetiStage1 : SeTi_Base {
         kunoichi = Ninja.I;
 
         stage1.EnableStage();
-        kunoichi.EnableControls();
+        kunoichi.EnableGameInputForUser();
         Time.timeScale = 1;
     }
 
