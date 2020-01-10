@@ -14,23 +14,27 @@ public class Stage1 : MonoBehaviour {
     bool isActive;
     int targetHitCounter;
 
+    GameObject goEnvironment1;
     GameObject goTarget1;
     GameObject goTarget2;
     GameObject goSkipTarget;
 
-    GameObject goEnvironment1;
     GameObject goEnvironment2;
+    GameObject goEnvironment2SpawnPoint;
 
     void Awake() {
         I = this;
 
+        goEnvironment1 = transform.Find("Environment 1").gameObject;
         goTarget1 = transform.Find("Environment 1/Targets/Target (1)").gameObject;
         goTarget2 = transform.Find("Environment 1/Targets/Target (2)").gameObject;
         goSkipTarget = transform.Find("Environment 1/Targets/Skip Target").gameObject;
 
-        goEnvironment1 = transform.Find("Environment 1").gameObject;
         goEnvironment2 = transform.Find("Environment 2").gameObject;
+        goEnvironment2SpawnPoint = transform.Find("Environment 2/Spawn Point").gameObject;
     }
+
+    private void Update() {}
 
     public void EnableStage() {
         gameInputForCutscene = GameInputForCutscene.I;
@@ -90,6 +94,7 @@ public class Stage1 : MonoBehaviour {
         this.AddEvent(() => {
             goEnvironment1.SetActive(false);
             goEnvironment2.SetActive(true);
+            kunoichi.transform.position = goEnvironment2SpawnPoint.transform.position;
         });
         this.AddEvent(EventFadeIn.I);
         this.AddEvent(() => {
