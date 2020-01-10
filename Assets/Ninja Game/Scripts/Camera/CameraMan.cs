@@ -7,6 +7,7 @@ public class CameraMan : MonoBehaviour {
     public static CameraMan I;
 
     public GameObject target;        //Public variable to store a reference to the player game object
+    public GameObject rightBound;
 
     private Vector3 offset;            //Private variable to store the offset distance between the player and camera
 
@@ -32,8 +33,9 @@ public class CameraMan : MonoBehaviour {
             return;
         }
 
+        float maxPosX = rightBound != null ? rightBound.transform.position.x : 250f; 
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        float newPosX = Mathf.Min(Mathf.Max((target.transform.position + offset).x, -20f), 250f);
+        float newPosX = Mathf.Min(Mathf.Max((target.transform.position + offset).x, -20f), maxPosX);
         Vector3 newPosition = new Vector3(newPosX, transform.position.y, transform.position.z);
         transform.position = newPosition;
     }

@@ -157,6 +157,12 @@ public class Ninja : MonoBehaviour {
         }
     }
 
+    public void IdleIfInput() {
+        if (!gameInput.KeyForLeft() && !gameInput.KeyForRight()) {
+            SwitchNode(NinjaNodeIdle.I);
+        }
+    }
+
     public void ThrowShuriken() {
         ActorSFXManager.I.Play(0);
 

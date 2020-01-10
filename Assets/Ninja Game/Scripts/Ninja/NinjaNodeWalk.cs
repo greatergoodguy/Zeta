@@ -15,7 +15,6 @@ public class NinjaNodeWalk : MonoBehaviour, NinjaNode_Base {
 
     public void EnterNode() {
         ninja = Ninja.I;
-        //ninja.SetAnimation(15);
         ninja.SetAnimation(12);
         _rigidbody = ninja.GetComponent<Rigidbody2D>();
     }
@@ -24,10 +23,7 @@ public class NinjaNodeWalk : MonoBehaviour, NinjaNode_Base {
         ninja.JumpIfInput();
         ninja.ThrowIfInput();
         ninja.CrouchIfInput();
-
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) {
-            ninja.SwitchNode(NinjaNodeIdle.I);
-        }
+        ninja.IdleIfInput();
     }
 
     public void FixedUpdateNode() {}

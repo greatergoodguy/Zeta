@@ -82,14 +82,20 @@ public class Stage1 : MonoBehaviour {
             return;
         }
 
-        this.AddEvent(kunoichi.DisableGameInput);
+        this.AddEvent(() => {
+            kunoichi.SetGameInput(gameInputForCutscene);
+            gameInputForCutscene._KeyForRight = true;
+        });
         this.AddEvent(EventFadeOut.I);
         this.AddEvent(() => {
             goEnvironment1.SetActive(false);
             goEnvironment2.SetActive(true);
         });
         this.AddEvent(EventFadeIn.I);
-        this.AddEvent(kunoichi.EnableGameInputForUser);
+        this.AddEvent(() => {
+            gameInputForCutscene._KeyForRight = false;
+            kunoichi.EnableGameInputForUser();
+        });
     }
 
     public void OnTransitionToKytesHouse() {
