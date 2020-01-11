@@ -53,10 +53,10 @@ public class Ninja : MonoBehaviour {
             FaceRight();
         }
 
-        if(transform.position.y < -10) {
-            Vector3 newPosition = new Vector3(transform.position.x, 15, transform.position.z);
-            transform.position = newPosition;
-        }
+        //if(transform.position.y < -10) {
+        //    Vector3 newPosition = new Vector3(transform.position.x, 15, transform.position.z);
+        //    transform.position = newPosition;
+        //}
     }
 
     public void SetGameInput(GameInput_Base _gameInput) {
@@ -164,8 +164,6 @@ public class Ninja : MonoBehaviour {
     }
 
     public void ThrowShuriken() {
-        ActorSFXManager.I.Play(0);
-
         GameObject goShuriken = Toolbox.Create("Shuriken");
         goShuriken.transform.position = transform.position;
         AgentShuriken shuriken = goShuriken.GetComponent<AgentShuriken>();
@@ -175,7 +173,9 @@ public class Ninja : MonoBehaviour {
         } else {
             shuriken.LaunchRight();
         }
-    }
+
+		ActorSFXManager.I.Play(0);
+	}
 
     bool isFacingLeft() {
         return _spriteRenderer.flipX == true;
