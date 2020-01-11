@@ -11,6 +11,8 @@ public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
 
     bool isActive;
 
+    ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
+
     void Awake() {
         I = this;
     }
@@ -35,9 +37,20 @@ public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
         isActive = false;
     }
 
-    void OnCollisionEnter2D(Collision2D collidingObject) {
+    void OnCollisionStay2D(Collision2D collidingObject) {
         if (isActive) {
-            ninja.SwitchNode(NinjaNodeIdle.I);
+            Toolbox.Log("OnCollisionStay2D()");
+            int numContacts = collidingObject.GetContacts(contactPoint2Ds);
+            for(int i=0; i< numContacts; i++) {
+                ContactPoint2D contactPoint2D = contactPoint2Ds[i];
+                Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
+                Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
+
+                if (contactPoint2D.normal.y > 0.75f) {
+                    ninja.SwitchNode(NinjaNodeIdle.I);
+                    return;
+                }
+            }
         }
     }
 }
