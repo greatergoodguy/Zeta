@@ -20,6 +20,9 @@ public class NinjaNodeWallSlide : MonoBehaviour, NinjaNode_Base {
         ninja.SetAnimation(17);
 
         isActive = true;
+
+        Collider2D _collider2D = ninja.GetComponent<Collider2D>();
+        _collider2D.sharedMaterial.friction = 0f;
     }
 
     public void UpdateNode() {
@@ -29,6 +32,9 @@ public class NinjaNodeWallSlide : MonoBehaviour, NinjaNode_Base {
     public void FixedUpdateNode() { }
 
     public void ExitNode() {
+        Collider2D _collider2D = ninja.GetComponent<Collider2D>();
+        _collider2D.sharedMaterial.friction = 1;
+
         isActive = false;
     }
 
