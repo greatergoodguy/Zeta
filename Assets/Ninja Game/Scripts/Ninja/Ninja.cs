@@ -39,6 +39,7 @@ public class Ninja : MonoBehaviour {
         gameInput = GameInputForUser.I;
         ninjaNode = NinjaNodeIdle.I;
         ninjaNode.EnterNode();
+        ninjaNode.IsActive = true;
         Toolbox.Log(ninjaNode.GetType().Name + ": Enter");
     }
 
@@ -57,6 +58,11 @@ public class Ninja : MonoBehaviour {
         //    Vector3 newPosition = new Vector3(transform.position.x, 15, transform.position.z);
         //    transform.position = newPosition;
         //}
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            Vector3 newPosition = new Vector3(-4.6f, 39f, transform.position.z);
+            transform.position = newPosition;
+        }
     }
 
     public void SetGameInput(GameInput_Base _gameInput) {
@@ -87,10 +93,12 @@ public class Ninja : MonoBehaviour {
 
     public void SwitchNode(NinjaNode_Base _ninjaNode) {
         ninjaNode.ExitNode();
+        ninjaNode.IsActive = false;
         Toolbox.Log(ninjaNode.GetType().Name + ": Exit");
 
         ninjaNode = _ninjaNode;
         ninjaNode.EnterNode();
+        ninjaNode.IsActive = true;
         Toolbox.Log(ninjaNode.GetType().Name + ": Enter");
     }
 

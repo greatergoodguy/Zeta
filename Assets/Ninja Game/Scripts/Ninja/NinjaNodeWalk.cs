@@ -39,11 +39,11 @@ public class NinjaNodeWalk : NinjaNode_Base {
     }
 
     void OnCollisionExit2D(Collision2D collidingObject) {
-        //if (isActive) {
-        //    int numContacts = collidingObject.GetContacts(contactPoint2Ds);
-        //    if (numContacts == 0) {
-        //        ninja.SwitchNode(NinjaNodeFall.I);
-        //    }
-        //}
+        if (IsActive) {
+            //int numContacts = collidingObject.GetContacts(contactPoint2Ds);
+            //if (numContacts == 0) {
+            //    ninja.SwitchNode(NinjaNodeFall.I);
+            //}
+        }
     }
 }

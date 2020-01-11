@@ -31,5 +31,4 @@ public class NinjaNodeThrow : NinjaNode_Base {
     public override void FixedUpdateNode() {}
 
     public override void ExitNode() {}
-
 }

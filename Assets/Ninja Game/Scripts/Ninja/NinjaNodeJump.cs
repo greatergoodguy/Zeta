@@ -9,8 +9,6 @@ public class NinjaNodeJump : NinjaNode_Base {
 
     private Rigidbody2D _rigidbody;
 
-    bool isActive;
-
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
 
     void Awake() {
@@ -23,7 +21,6 @@ public class NinjaNodeJump : NinjaNode_Base {
         _rigidbody = ninja.GetComponent<Rigidbody2D>();
         Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
         _rigidbody.AddForce(jumpForce);
-        isActive = true;
     }
 
     public override void UpdateNode() {
@@ -33,12 +30,10 @@ public class NinjaNodeJump : NinjaNode_Base {
 
     public override void FixedUpdateNode() {}
 
-    public override void ExitNode() {
-        isActive = false;
-    }
+    public override void ExitNode() {}
 
     void OnCollisionStay2D(Collision2D collidingObject) {
-        if (isActive) {
+        if (IsActive) {
             Toolbox.Log("OnCollisionStay2D()");
             int numContacts = collidingObject.GetContacts(contactPoint2Ds);
             for(int i=0; i< numContacts; i++) {

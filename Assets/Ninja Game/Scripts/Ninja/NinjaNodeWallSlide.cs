@@ -7,9 +7,10 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
 
     Ninja ninja;
 
-    bool isActive;
-
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
+
+    public float gravityScaleEnter = 20f;
+    private float gravityScaleExit;
 
     void Awake() {
         I = this;
@@ -19,10 +20,9 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
         ninja = Ninja.I;
         ninja.SetAnimation(17);
 
-        isActive = true;
-
-        Collider2D _collider2D = ninja.GetComponent<Collider2D>();
-        _collider2D.sharedMaterial.friction = 0f;
+        var _rigidbody2D = ninja.GetComponent<Rigidbody2D>();
+        gravityScaleExit = _rigidbody2D.gravityScale;
+        _rigidbody2D.gravityScale = gravityScaleEnter;
     }
 
     public override void UpdateNode() {}
@@ -30,18 +30,16 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     public override void FixedUpdateNode() {}
 
     public override void ExitNode() {
-        Collider2D _collider2D = ninja.GetComponent<Collider2D>();
-        _collider2D.sharedMaterial.friction = 1;
-
-        isActive = false;
+        var _rigidbody2D = ninja.GetComponent<Rigidbody2D>();
+        _rigidbody2D.gravityScale = gravityScaleExit;
     }
 
     void OnCollisionStay2D(Collision2D collidingObject) {
-        if (isActive) {
+        if (IsActive) {
             Toolbox.Log("OnCollisionStay2D()");
             int numContacts = collidingObject.GetContacts(contactPoint2Ds);
             for (int i = 0; i < numContacts; i++) {
-                ContactPoint2D contactPoint2D = contactPoint2Ds[i];
+                var contactPoint2D = contactPoint2Ds[i];
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
@@ -58,7 +56,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     }
 
     void OnCollisionExit2D(Collision2D collidingObject) {
-        if (isActive) {
+        if (IsActive) {
             int numContacts = collidingObject.GetContacts(contactPoint2Ds);
             if(numContacts == 0) {
                 ninja.SwitchNode(NinjaNodeFall.I);
