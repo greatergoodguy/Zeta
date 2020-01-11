@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
+public class NinjaNodeJump : NinjaNode_Base {
     public static NinjaNodeJump I;
 
     Ninja ninja;
@@ -17,7 +17,7 @@ public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
         I = this;
     }
 
-    public void EnterNode() {
+    public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(9);
         _rigidbody = ninja.GetComponent<Rigidbody2D>();
@@ -26,14 +26,14 @@ public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
         isActive = true;
     }
 
-    public void UpdateNode() {
+    public override void UpdateNode() {
         ninja.JumpThrowIfInput();
     }
 
 
-    public void FixedUpdateNode() {}
+    public override void FixedUpdateNode() {}
 
-    public void ExitNode() {
+    public override void ExitNode() {
         isActive = false;
     }
 

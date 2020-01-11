@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeCrouch: MonoBehaviour, NinjaNode_Base {
+public class NinjaNodeCrouch: NinjaNode_Base {
     public static NinjaNodeCrouch I;
 
     Ninja ninja;
@@ -12,12 +12,12 @@ public class NinjaNodeCrouch: MonoBehaviour, NinjaNode_Base {
         I = this;
     }
 
-    public void EnterNode() {
+    public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(4);
     }
 
-    public void UpdateNode() {
+    public override void UpdateNode() {
         ninja.CrouchThrowIfInput();
 
         if (!Input.GetKey(KeyCode.S)) {
@@ -25,8 +25,8 @@ public class NinjaNodeCrouch: MonoBehaviour, NinjaNode_Base {
         }
     }
 
-    public void FixedUpdateNode() {}
+    public override void FixedUpdateNode() {}
 
-    public void ExitNode() {}
+    public override void ExitNode() {}
 
 }

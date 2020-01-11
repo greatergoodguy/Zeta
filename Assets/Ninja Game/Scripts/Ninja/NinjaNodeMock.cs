@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeMock : MonoBehaviour, NinjaNode_Base {
+public class NinjaNodeMock : NinjaNode_Base {
     public static NinjaNodeMock I;
 
     void Awake() {
         I = this;
     }
 
-    public void EnterNode() {}
+    public override void EnterNode() {}
 
-    public void UpdateNode() {}
+    public override void UpdateNode() {}
 
-    public void FixedUpdateNode() {}
+    public override void FixedUpdateNode() {}
 
-    public void ExitNode() {}
+    public override void ExitNode() {}
 }

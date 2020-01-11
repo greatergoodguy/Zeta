@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeFall: MonoBehaviour, NinjaNode_Base {
+public class NinjaNodeFall: NinjaNode_Base {
     public static NinjaNodeFall I;
 
     Ninja ninja;
@@ -17,20 +17,20 @@ public class NinjaNodeFall: MonoBehaviour, NinjaNode_Base {
         I = this;
     }
 
-    public void EnterNode() {
+    public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(9);
         isActive = true;
     }
 
-    public void UpdateNode() {
+    public override void UpdateNode() {
         ninja.JumpThrowIfInput();
     }
 
 
-    public void FixedUpdateNode() {}
+    public override void FixedUpdateNode() {}
 
-    public void ExitNode() {
+    public override void ExitNode() {
         isActive = false;
     }
 

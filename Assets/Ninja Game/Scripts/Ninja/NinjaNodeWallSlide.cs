@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeWallSlide : MonoBehaviour, NinjaNode_Base {
+public class NinjaNodeWallSlide : NinjaNode_Base {
     public static NinjaNodeWallSlide I;
 
     Ninja ninja;
@@ -15,7 +15,7 @@ public class NinjaNodeWallSlide : MonoBehaviour, NinjaNode_Base {
         I = this;
     }
 
-    public void EnterNode() {
+    public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(17);
 
@@ -25,13 +25,11 @@ public class NinjaNodeWallSlide : MonoBehaviour, NinjaNode_Base {
         _collider2D.sharedMaterial.friction = 0f;
     }
 
-    public void UpdateNode() {
-    }
+    public override void UpdateNode() {}
 
+    public override void FixedUpdateNode() {}
 
-    public void FixedUpdateNode() { }
-
-    public void ExitNode() {
+    public override void ExitNode() {
         Collider2D _collider2D = ninja.GetComponent<Collider2D>();
         _collider2D.sharedMaterial.friction = 1;
 

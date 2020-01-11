@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface NinjaNode_Base {
-    void EnterNode();
-    void UpdateNode();
-    void FixedUpdateNode();
-    void ExitNode();
+public abstract class NinjaNode_Base : MonoBehaviour {
+    public abstract void EnterNode();
+    public abstract void UpdateNode();
+    public abstract void FixedUpdateNode();
+    public abstract void ExitNode();
 }

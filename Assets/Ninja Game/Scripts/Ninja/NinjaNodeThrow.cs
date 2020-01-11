@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeThrow : MonoBehaviour, NinjaNode_Base {
+public class NinjaNodeThrow : NinjaNode_Base {
     public static NinjaNodeThrow I;
 
     Ninja ninja;
@@ -13,7 +13,7 @@ public class NinjaNodeThrow : MonoBehaviour, NinjaNode_Base {
         I = this;
     }
 
-    public void EnterNode() {
+    public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(14);
         elapsedTime = 0;
@@ -21,15 +21,15 @@ public class NinjaNodeThrow : MonoBehaviour, NinjaNode_Base {
         ninja.ThrowShuriken();
     }
 
-    public void UpdateNode() {
+    public override void UpdateNode() {
         elapsedTime += Time.deltaTime;
         if(elapsedTime > 0.15f) {
             ninja.SwitchNode(NinjaNodeIdle.I);
         }
     }
 
-    public void FixedUpdateNode() {}
+    public override void FixedUpdateNode() {}
 
-    public void ExitNode() {}
+    public override void ExitNode() {}
 
 }

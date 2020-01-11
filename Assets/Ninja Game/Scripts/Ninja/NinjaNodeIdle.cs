@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeIdle : MonoBehaviour, NinjaNode_Base {
+public class NinjaNodeIdle : NinjaNode_Base {
     public static NinjaNodeIdle I;
 
     Ninja ninja;
 
-    void Awake()
-    {
+    void Awake() {
         I = this;
     }
 
-    public void EnterNode() {
+    public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(0);
     }
 
-    public void UpdateNode() {
+    public override void UpdateNode() {
         ninja.JumpIfInput();
         ninja.ThrowIfInput();
         ninja.CrouchIfInput();
         ninja.WalkIfInput();
     }
 
-    public void FixedUpdateNode() {}
+    public override void FixedUpdateNode() {}
 
-    public void ExitNode() {}
+    public override void ExitNode() {}
 
 }
