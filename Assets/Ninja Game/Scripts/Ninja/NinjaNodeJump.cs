@@ -46,6 +46,10 @@ public class NinjaNodeJump : MonoBehaviour, NinjaNode_Base {
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
+                if (contactPoint2D.normal.x > 0.75f) {
+                    ninja.SwitchNode(NinjaNodeWallSlide.I);
+                    return;
+                }
                 if (contactPoint2D.normal.y > 0.75f) {
                     ninja.SwitchNode(NinjaNodeIdle.I);
                     return;

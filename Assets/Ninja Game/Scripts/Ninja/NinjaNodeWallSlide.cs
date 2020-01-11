@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NinjaNodeFall: MonoBehaviour, NinjaNode_Base {
-    public static NinjaNodeFall I;
+public class NinjaNodeWallSlide : MonoBehaviour, NinjaNode_Base {
+    public static NinjaNodeWallSlide I;
 
     Ninja ninja;
-
-    private Rigidbody2D _rigidbody;
 
     bool isActive;
 
@@ -19,16 +17,16 @@ public class NinjaNodeFall: MonoBehaviour, NinjaNode_Base {
 
     public void EnterNode() {
         ninja = Ninja.I;
-        ninja.SetAnimation(9);
+        ninja.SetAnimation(17);
+
         isActive = true;
     }
 
     public void UpdateNode() {
-        ninja.JumpThrowIfInput();
     }
 
 
-    public void FixedUpdateNode() {}
+    public void FixedUpdateNode() { }
 
     public void ExitNode() {
         isActive = false;
@@ -43,14 +41,23 @@ public class NinjaNodeFall: MonoBehaviour, NinjaNode_Base {
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
-                if (contactPoint2D.normal.x > 0.75f) {
-                    ninja.SwitchNode(NinjaNodeWallSlide.I);
-                    return;
-                }
                 if (contactPoint2D.normal.y > 0.75f) {
                     ninja.SwitchNode(NinjaNodeIdle.I);
                     return;
                 }
+                if (contactPoint2D.normal.x < 0.75f) {
+                    ninja.SwitchNode(NinjaNodeFall.I);
+                    return;
+                }
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collidingObject) {
+        if (isActive) {
+            int numContacts = collidingObject.GetContacts(contactPoint2Ds);
+            if(numContacts == 0) {
+                ninja.SwitchNode(NinjaNodeFall.I);
             }
         }
     }
