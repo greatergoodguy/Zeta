@@ -18,9 +18,13 @@ public class Stage1 : MonoBehaviour {
     GameObject goTarget1;
     GameObject goTarget2;
     GameObject goSkipTarget;
+    GameObject goEnvironment1SpawnPoint;
+    GameObject goEnvironment1Transition;
+
 
     GameObject goEnvironment2;
     GameObject goEnvironment2SpawnPoint;
+    GameObject goEnvironment2Transition;
 
     void Awake() {
         I = this;
@@ -29,9 +33,12 @@ public class Stage1 : MonoBehaviour {
         goTarget1 = transform.Find("Environment 1/Targets/Target (1)").gameObject;
         goTarget2 = transform.Find("Environment 1/Targets/Target (2)").gameObject;
         goSkipTarget = transform.Find("Environment 1/Targets/Skip Target").gameObject;
+        goEnvironment1SpawnPoint = transform.Find("Environment 1/Spawn Point").gameObject;
+        goEnvironment1Transition = transform.Find("Environment 1/Transition to Temple").gameObject;
 
         goEnvironment2 = transform.Find("Environment 2").gameObject;
         goEnvironment2SpawnPoint = transform.Find("Environment 2/Spawn Point").gameObject;
+        goEnvironment2Transition = transform.Find("Environment 2/Transition to Kyte's House").gameObject;
     }
 
     private void Update() {}
@@ -94,12 +101,14 @@ public class Stage1 : MonoBehaviour {
         this.AddEvent(() => {
             goEnvironment1.SetActive(false);
             goEnvironment2.SetActive(true);
+            goEnvironment2Transition.SetActive(false);
             kunoichi.transform.position = goEnvironment2SpawnPoint.transform.position;
         });
         this.AddEvent(EventFadeIn.I);
         this.AddEvent(() => {
             gameInputForCutscene._KeyForRight = false;
             kunoichi.EnableGameInputForUser();
+            goEnvironment2Transition.SetActive(true);
         });
     }
 
@@ -108,14 +117,23 @@ public class Stage1 : MonoBehaviour {
             return;
         }
 
-        this.AddEvent(kunoichi.DisableGameInput);
+        this.AddEvent(() => {
+            kunoichi.SetGameInput(gameInputForCutscene);
+            gameInputForCutscene._KeyForLeft = true;
+        });
         this.AddEvent(EventFadeOut.I);
         this.AddEvent(() => {
             goEnvironment1.SetActive(true);
             goEnvironment2.SetActive(false);
+            goEnvironment1Transition.SetActive(false);
+            kunoichi.transform.position = goEnvironment1SpawnPoint.transform.position;
         });
         this.AddEvent(EventFadeIn.I);
-        this.AddEvent(kunoichi.EnableGameInputForUser);
+        this.AddEvent(() => {
+            gameInputForCutscene._KeyForLeft = false;
+            kunoichi.EnableGameInputForUser();
+            goEnvironment1Transition.SetActive(true);
+        });
     }
 
     void DestroyTriggersPart1() {
