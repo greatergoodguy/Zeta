@@ -33,7 +33,6 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     }
 
     public override void UpdateNode() {
-        NinjaNodeWallJump.I.OnTransitionFromWallSlide(true);
         ninja.WallJumpIfInput();
     }
 
@@ -59,7 +58,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
                     ninja.SwitchNode(NinjaNodeIdle.I);
                     return;
                 }
-                if (contactPoint2D.normal.x < 0.75f) {
+                if (Mathf.Abs(contactPoint2D.normal.x) < 0.75f) {
                     ninja.SwitchNode(NinjaNodeFall.I);
                     return;
                 }

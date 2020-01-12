@@ -25,18 +25,28 @@ public class NinjaNodeWallJump : NinjaNode_Base {
         ninja = Ninja.I;
         ninja.SetAnimation(9);
         _rigidbody = ninja.GetComponent<Rigidbody2D>();
-        if (isWallOnLeft.HasValue) {
-            if (isWallOnLeft.Value) {
-                ninja.FaceRight();
-                Vector2 jumpForce = new Vector2(1, 1).normalized * Ninja.I.jumpForce;
-                _rigidbody.AddForce(jumpForce);
-            } else {
-                ninja.FaceLeft();
-                Vector2 jumpForce = new Vector2(-1, 1).normalized * Ninja.I.jumpForce;
-                _rigidbody.AddForce(jumpForce);
-            }
-        } else {
-            Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
+        //if (isWallOnLeft.HasValue) {
+        //    if (isWallOnLeft.Value) {
+        //        ninja.FaceRight();
+        //        Vector2 jumpForce = new Vector2(1, 1).normalized * Ninja.I.jumpForce;
+        //        _rigidbody.AddForce(jumpForce);
+        //    } else {
+        //        ninja.FaceLeft();
+        //        Vector2 jumpForce = new Vector2(-1, 1).normalized * Ninja.I.jumpForce;
+        //        _rigidbody.AddForce(jumpForce);
+        //    }
+        //} else {
+        //    Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
+        //    _rigidbody.AddForce(jumpForce);
+        //}
+        if (ninja.isFacingLeft()) {
+            ninja.FaceRight();
+            Vector2 jumpForce = new Vector2(1, 1).normalized * Ninja.I.jumpForce;
+            _rigidbody.AddForce(jumpForce);
+        }
+        else {
+            ninja.FaceLeft();
+            Vector2 jumpForce = new Vector2(-1, 1).normalized * Ninja.I.jumpForce;
             _rigidbody.AddForce(jumpForce);
         }
         ActorSFXManager.I.Play(ActorSFXManager.Jump);
@@ -63,7 +73,7 @@ public class NinjaNodeWallJump : NinjaNode_Base {
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
-                if (contactPoint2D.normal.x > 0.75f && _rigidbody.velocity.y < 0) {
+                if (Mathf.Abs(contactPoint2D.normal.x) > 0.75f && _rigidbody.velocity.y < 0) {
                     ninja.SwitchNode(NinjaNodeWallSlide.I);
                     return;
                 }
