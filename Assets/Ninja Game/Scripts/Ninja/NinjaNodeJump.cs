@@ -26,6 +26,7 @@ public class NinjaNodeJump : NinjaNode_Base {
 
     public override void UpdateNode() {
         ninja.JumpThrowIfInput();
+        ninja.GlideIfInput();
     }
 
 

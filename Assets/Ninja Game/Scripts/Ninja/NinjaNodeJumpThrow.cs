@@ -30,6 +30,8 @@ public class NinjaNodeJumpThrow : NinjaNode_Base {
         elapsedTime += Time.deltaTime;
         if (elapsedTime > 0.15f) {
             ninja.SwitchNode(NinjaNodeFall.I);
+        } else {
+            ninja.GlideIfInput();
         }
     }
 

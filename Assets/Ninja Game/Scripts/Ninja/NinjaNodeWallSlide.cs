@@ -17,13 +17,13 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
 
     void Awake() {
         I = this;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(17);
 
-        _rigidbody = ninja.GetComponent<Rigidbody2D>();
         gravityScaleExit = _rigidbody.gravityScale;
         _rigidbody.gravityScale = gravityScaleEnter;
 

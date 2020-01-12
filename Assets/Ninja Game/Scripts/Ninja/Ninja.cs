@@ -156,6 +156,12 @@ public class Ninja : MonoBehaviour {
         }
     }
 
+    public void GlideIfInput() {
+        if (gameInput.KeyForJump()) {
+            SwitchNode(NinjaNodeGlide.I);
+        }
+    }
+
     public void Throw() {
         SwitchNode(NinjaNodeThrow.I);
     }
