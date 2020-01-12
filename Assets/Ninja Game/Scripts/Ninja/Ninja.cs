@@ -137,6 +137,12 @@ public class Ninja : MonoBehaviour {
         }
     }
 
+    public void WallJumpIfInput() {
+        if (gameInput.KeyForJump()) {
+            SwitchNode(NinjaNodeWallJump.I);
+        }
+    }
+
     public void ThrowIfInput() {
         if (gameInput.KeyDownForThrow()) {
             Throw();
@@ -185,7 +191,7 @@ public class Ninja : MonoBehaviour {
 		ActorSFXManager.I.Play(0);
 	}
 
-    bool isFacingLeft() {
+    public bool isFacingLeft() {
         return _spriteRenderer.flipX == true;
     }
 }

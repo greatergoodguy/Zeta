@@ -31,11 +31,8 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     }
 
     public override void UpdateNode() {
-        // if (wallSlideParticleSystem.isPlaying && _rigidbody2D.velocity.y >= 0) {
-        //     wallSlideParticleSystem.Stop();
-        // } else if (wallSlideParticleSystem.isStopped && _rigidbody2D.velocity.y <0) {
-        //     wallSlideParticleSystem.Play();
-        // }
+        NinjaNodeWallJump.I.OnTransitionFromWallSlide(true);
+        ninja.WallJumpIfInput();
     }
 
     public override void FixedUpdateNode() {}
