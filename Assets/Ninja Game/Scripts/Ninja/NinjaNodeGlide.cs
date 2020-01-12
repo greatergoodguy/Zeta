@@ -11,8 +11,6 @@ public class NinjaNodeGlide: NinjaNode_Base {
     private float gravityScaleExit;
     private Rigidbody2D _rigidbody;
 
-    bool isActive;
-
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
 
     void Awake() {
@@ -27,9 +25,7 @@ public class NinjaNodeGlide: NinjaNode_Base {
         gravityScaleExit = _rigidbody.gravityScale;
         _rigidbody.gravityScale = gravityScaleEnter;
 
-        isActive = true;
-        ActorSFXManager.I.Play(ActorSFXManager.WallHitJump);
-
+        ActorSFXManager.I.Play(ActorSFXManager.Glide);
     }
 
     public override void UpdateNode() {
@@ -40,11 +36,11 @@ public class NinjaNodeGlide: NinjaNode_Base {
 
     public override void ExitNode() {
         _rigidbody.gravityScale = gravityScaleExit;
-        isActive = false;
+        ActorSFXManager.I.Stop(ActorSFXManager.Glide);
     }
 
     void OnCollisionStay2D(Collision2D collidingObject) {
-        if (isActive) {
+        if (IsActive) {
             Toolbox.Log("OnCollisionStay2D()");
             int numContacts = collidingObject.GetContacts(contactPoint2Ds);
             for (int i = 0; i < numContacts; i++) {
