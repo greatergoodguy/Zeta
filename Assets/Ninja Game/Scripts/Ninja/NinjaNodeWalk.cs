@@ -11,12 +11,12 @@ public class NinjaNodeWalk : NinjaNode_Base {
 
     void Awake() {
         I = this;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(12);
-        _rigidbody = ninja.GetComponent<Rigidbody2D>();
     }
 
     public override void UpdateNode() {

@@ -46,7 +46,7 @@ public class NinjaNodeJump : NinjaNode_Base {
                     ninja.SwitchNode(NinjaNodeWallSlide.I);
                     return;
                 }
-                if (contactPoint2D.normal.y > 0.75f) {
+                if (contactPoint2D.normal.y > 0.75f && _rigidbody.velocity.y < 20) {
                     ninja.SwitchNode(NinjaNodeIdle.I);
                     return;
                 }

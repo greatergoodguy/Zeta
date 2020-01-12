@@ -33,7 +33,7 @@ public class GameInputForUser : GameInput_Base {
     }
 
     public override bool KeyForJump() {
-        return Input.GetKey(KeyCode.Space);
+        return Input.GetKeyDown(KeyCode.Space);
     }
 
     public override bool KeyDownForThrow() {

@@ -13,7 +13,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
 
     public float gravityScaleEnter = 20f;
     private float gravityScaleExit;
-    private Rigidbody2D _rigidbody2D;
+    private Rigidbody2D _rigidbody;
 
     void Awake() {
         I = this;
@@ -23,9 +23,9 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
         ninja = Ninja.I;
         ninja.SetAnimation(17);
 
-        _rigidbody2D = ninja.GetComponent<Rigidbody2D>();
-        gravityScaleExit = _rigidbody2D.gravityScale;
-        _rigidbody2D.gravityScale = gravityScaleEnter;
+        _rigidbody = ninja.GetComponent<Rigidbody2D>();
+        gravityScaleExit = _rigidbody.gravityScale;
+        _rigidbody.gravityScale = gravityScaleEnter;
 
         wallSlideParticleSystem.Play();
         ActorSFXManager.I.Play(ActorSFXManager.WallHitJump);
@@ -40,7 +40,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     public override void FixedUpdateNode() {}
 
     public override void ExitNode() {
-        _rigidbody2D.gravityScale = gravityScaleExit;
+        _rigidbody.gravityScale = gravityScaleExit;
 
         wallSlideParticleSystem.Stop();
         ActorSFXManager.I.Stop(ActorSFXManager.WallSlide);
@@ -55,7 +55,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 // Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
-                if (contactPoint2D.normal.y > 0.75f) {
+                if (contactPoint2D.normal.y > 0.75f && _rigidbody.velocity.y < 20) {
                     ninja.SwitchNode(NinjaNodeIdle.I);
                     return;
                 }
