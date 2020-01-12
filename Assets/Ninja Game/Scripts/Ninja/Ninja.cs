@@ -54,11 +54,6 @@ public class Ninja : MonoBehaviour {
             FaceRight();
         }
 
-        //if(transform.position.y < -10) {
-        //    Vector3 newPosition = new Vector3(transform.position.x, 15, transform.position.z);
-        //    transform.position = newPosition;
-        //}
-
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             Vector3 newPosition = new Vector3(-4.6f, 39f, transform.position.z);
             transform.position = newPosition;
@@ -113,11 +108,17 @@ public class Ninja : MonoBehaviour {
     public void MoveHorizontal() {
         if (Math.Abs(_rigidbody2D.velocity.x) < horizontalMaxSpeed) {
             if (gameInput.KeyForLeft()) {
+                if(!isFacingLeft()) {
+                    FaceLeft();
+                }
                 Vector2 movement = new Vector2(-1, 0);
                 Vector2 horizontalForce = horizontalMovementScalar * movement;
                 _rigidbody2D.AddForce(horizontalForce);
             }
             if (gameInput.KeyForRight()) {
+                if (isFacingLeft()) {
+                    FaceRight();
+                }
                 Vector2 movement = new Vector2(1, 0);
                 Vector2 horizontalForce = horizontalMovementScalar * movement;
                 _rigidbody2D.AddForce(horizontalForce);
