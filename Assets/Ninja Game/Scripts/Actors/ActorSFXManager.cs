@@ -9,6 +9,7 @@ public class ActorSFXManager : MonoBehaviour {
 	public const int WallHitJump = 2;
 	public const int WallSlide = 3;
 	public const int Glide = 4;
+	public const int Jump = 5;
 
     public static ActorSFXManager I;
 

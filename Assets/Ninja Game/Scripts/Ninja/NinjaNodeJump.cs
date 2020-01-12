@@ -19,7 +19,7 @@ public class NinjaNodeJump : NinjaNode_Base {
         var _rigidbody = ninja.GetComponent<Rigidbody2D>();
         Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
         _rigidbody.AddForce(jumpForce);
-        ActorSFXManager.I.Play(ActorSFXManager.WallHitJump);
+        ActorSFXManager.I.Play(ActorSFXManager.Jump);
     }
 
     public override void UpdateNode() {
