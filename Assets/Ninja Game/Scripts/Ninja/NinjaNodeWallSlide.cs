@@ -28,6 +28,8 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
         _rigidbody2D.gravityScale = gravityScaleEnter;
 
         wallSlideParticleSystem.Play();
+        ActorSFXManager.I.Play(ActorSFXManager.WallHitJump);
+        ActorSFXManager.I.Play(ActorSFXManager.WallSlide);
     }
 
     public override void UpdateNode() {
@@ -41,6 +43,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
         _rigidbody2D.gravityScale = gravityScaleExit;
 
         wallSlideParticleSystem.Stop();
+        ActorSFXManager.I.Stop(ActorSFXManager.WallSlide);
     }
 
     void OnCollisionStay2D(Collision2D collidingObject) {

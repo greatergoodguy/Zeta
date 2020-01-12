@@ -4,43 +4,10 @@ using System.Collections.Generic;
 
 public class ActorSFXManager : MonoBehaviour {
 
-    /*
-	 * 0 - Shuriken Throw
-	 * 1 - Shuriken Hit
-	 * 2 - 
-	 * 3 - 
-	 * 4 - 
-	 * 5 - 
-	 * 6 - 
-	 * 7 - 
-	 * 8 - 
-	 * 9 - 
-	 * 10 - 
-	 * 11 - 
-	 * 12 - 
-	 * 13 - 
-	 * 14 - 
-	 * 15 - 
-	 * 16 - 
-	 * 17 - 
-	 * 18 - 
-	 * 19 - 
-	 * 20 - 
-	 * 21 - 
-	 * 22 - 
-	 * 23 - 
-	 * 24 - 
-	 * 25 - 
-	 * 26 - 
-	 * 27 - 
-	 * 28 - 
-	 * 29 - 
-	 * 30 - 
-	 * 31 - 
-	 * 32 - 
-	 * 
-	 * 
-	 * */
+	public const int ShurikenThrow = 0;
+	public const int ShurikenHit = 1;
+	public const int WallHitJump = 2;
+	public const int WallSlide = 3;
 
     public static ActorSFXManager I;
 

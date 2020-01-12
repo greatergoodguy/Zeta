@@ -39,6 +39,7 @@ public class NinjaNodeWallJump : NinjaNode_Base {
             Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
             _rigidbody.AddForce(jumpForce);
         }
+        ActorSFXManager.I.Play(ActorSFXManager.WallHitJump);
     }
 
     public override void UpdateNode() {

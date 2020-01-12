@@ -62,6 +62,6 @@ public class AgentShuriken : MonoBehaviour {
     }
 
     void ShurikenHitSFX() {
-        ActorSFXManager.I.Play(1);
+        ActorSFXManager.I.Play(ActorSFXManager.ShurikenHit);
     }
 }

@@ -188,7 +188,7 @@ public class Ninja : MonoBehaviour {
             shuriken.LaunchRight();
         }
 
-		ActorSFXManager.I.Play(0);
+		ActorSFXManager.I.Play(ActorSFXManager.ShurikenThrow);
 	}
 
     public bool isFacingLeft() {
