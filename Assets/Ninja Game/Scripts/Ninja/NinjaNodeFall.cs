@@ -20,6 +20,7 @@ public class NinjaNodeFall: NinjaNode_Base {
     public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(9);
+        _rigidbody = ninja.GetComponent<Rigidbody2D>();
         isActive = true;
     }
 
@@ -43,7 +44,7 @@ public class NinjaNodeFall: NinjaNode_Base {
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
-                if (contactPoint2D.normal.x > 0.75f) {
+                if (contactPoint2D.normal.x > 0.75f && _rigidbody.velocity.y < 0) {
                     ninja.SwitchNode(NinjaNodeWallSlide.I);
                     return;
                 }

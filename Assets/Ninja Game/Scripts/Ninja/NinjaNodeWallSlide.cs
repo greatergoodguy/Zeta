@@ -5,12 +5,15 @@ using UnityEngine;
 public class NinjaNodeWallSlide : NinjaNode_Base {
     public static NinjaNodeWallSlide I;
 
+    public ParticleSystem wallSlideParticleSystem;
+
     Ninja ninja;
 
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
 
     public float gravityScaleEnter = 20f;
     private float gravityScaleExit;
+    private Rigidbody2D _rigidbody2D;
 
     void Awake() {
         I = this;
@@ -20,18 +23,27 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
         ninja = Ninja.I;
         ninja.SetAnimation(17);
 
-        var _rigidbody2D = ninja.GetComponent<Rigidbody2D>();
+        _rigidbody2D = ninja.GetComponent<Rigidbody2D>();
         gravityScaleExit = _rigidbody2D.gravityScale;
         _rigidbody2D.gravityScale = gravityScaleEnter;
+
+        wallSlideParticleSystem.Play();
     }
 
-    public override void UpdateNode() {}
+    public override void UpdateNode() {
+        // if (wallSlideParticleSystem.isPlaying && _rigidbody2D.velocity.y >= 0) {
+        //     wallSlideParticleSystem.Stop();
+        // } else if (wallSlideParticleSystem.isStopped && _rigidbody2D.velocity.y <0) {
+        //     wallSlideParticleSystem.Play();
+        // }
+    }
 
     public override void FixedUpdateNode() {}
 
     public override void ExitNode() {
-        var _rigidbody2D = ninja.GetComponent<Rigidbody2D>();
         _rigidbody2D.gravityScale = gravityScaleExit;
+
+        wallSlideParticleSystem.Stop();
     }
 
     void OnCollisionStay2D(Collision2D collidingObject) {
@@ -41,7 +53,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
             for (int i = 0; i < numContacts; i++) {
                 var contactPoint2D = contactPoint2Ds[i];
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
-                Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
+                // Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
                 if (contactPoint2D.normal.y > 0.75f) {
                     ninja.SwitchNode(NinjaNodeIdle.I);
