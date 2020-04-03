@@ -5,40 +5,24 @@ using UnityEngine;
 public class NinjaNodeWallJump : NinjaNode_Base {
     public static NinjaNodeWallJump I;
 
+    public float holdDuration = 0.25f;
+
     Ninja ninja;
 
     private Rigidbody2D _rigidbody;
 
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
 
-    private bool? isWallOnLeft = null;
+    float elapsedTime;
 
     void Awake() {
         I = this;
-    }
-
-    public void OnTransitionFromWallSlide(bool? isWallOnLeft) {
-        this.isWallOnLeft = isWallOnLeft;
     }
 
     public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(9);
         _rigidbody = ninja.GetComponent<Rigidbody2D>();
-        //if (isWallOnLeft.HasValue) {
-        //    if (isWallOnLeft.Value) {
-        //        ninja.FaceRight();
-        //        Vector2 jumpForce = new Vector2(1, 1).normalized * Ninja.I.jumpForce;
-        //        _rigidbody.AddForce(jumpForce);
-        //    } else {
-        //        ninja.FaceLeft();
-        //        Vector2 jumpForce = new Vector2(-1, 1).normalized * Ninja.I.jumpForce;
-        //        _rigidbody.AddForce(jumpForce);
-        //    }
-        //} else {
-        //    Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
-        //    _rigidbody.AddForce(jumpForce);
-        //}
         if (ninja.isFacingLeft()) {
             ninja.FaceRight();
             Vector2 jumpForce = new Vector2(1, 1).normalized * Ninja.I.jumpForce;
@@ -49,19 +33,27 @@ public class NinjaNodeWallJump : NinjaNode_Base {
             Vector2 jumpForce = new Vector2(-1, 1).normalized * Ninja.I.jumpForce;
             _rigidbody.AddForce(jumpForce);
         }
+
+        elapsedTime = 0;
+        ninja.SetIgnoreLeftRightInput(true);
         ActorSFXManager.I.Play(ActorSFXManager.Jump);
     }
 
     public override void UpdateNode() {
+        elapsedTime += Time.deltaTime;
+
         ninja.JumpThrowIfInput();
         ninja.GlideIfInput();
-    }
 
+        if (elapsedTime > holdDuration) {
+            ninja.SetIgnoreLeftRightInput(false);
+        }
+    }
 
     public override void FixedUpdateNode() {}
 
     public override void ExitNode() {
-        this.isWallOnLeft = null;
+        ninja.SetIgnoreLeftRightInput(false);
     }
 
     void OnCollisionStay2D(Collision2D collidingObject) {

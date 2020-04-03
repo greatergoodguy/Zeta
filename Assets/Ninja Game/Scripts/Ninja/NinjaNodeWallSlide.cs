@@ -47,11 +47,11 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
 
     void OnCollisionStay2D(Collision2D collidingObject) {
         if (IsActive) {
-            Toolbox.Log("OnCollisionStay2D()");
+            // Toolbox.Log("OnCollisionStay2D()");
             int numContacts = collidingObject.GetContacts(contactPoint2Ds);
             for (int i = 0; i < numContacts; i++) {
                 var contactPoint2D = contactPoint2Ds[i];
-                Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
+                // Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 // Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
                 if (contactPoint2D.normal.y > 0.75f && _rigidbody.velocity.y < 20) {

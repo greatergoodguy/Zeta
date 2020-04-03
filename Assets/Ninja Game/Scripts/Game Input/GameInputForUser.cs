@@ -36,6 +36,10 @@ public class GameInputForUser : GameInput_Base {
         return Input.GetKeyDown(KeyCode.Space);
     }
 
+    public override bool KeyForGlide() {
+        return Input.GetKey(KeyCode.Space);
+    }
+
     public override bool KeyDownForThrow() {
         return Input.GetKeyDown(KeyCode.LeftShift);
     }

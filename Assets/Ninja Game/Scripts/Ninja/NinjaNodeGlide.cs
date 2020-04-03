@@ -7,7 +7,7 @@ public class NinjaNodeGlide: NinjaNode_Base {
 
     Ninja ninja;
 
-    public float gravityScaleEnter = 20f;
+    public float gravityScaleEnter = 1f;
     private float gravityScaleExit;
     private Rigidbody2D _rigidbody;
 
@@ -25,11 +25,15 @@ public class NinjaNodeGlide: NinjaNode_Base {
         gravityScaleExit = _rigidbody.gravityScale;
         _rigidbody.gravityScale = gravityScaleEnter;
 
+        Toolbox.Log("OnCollisionStay2D(): gravityScaleEnter - " + gravityScaleEnter);
+        Toolbox.Log("OnCollisionStay2D(): _rigidbody.gravityScale - " + _rigidbody.gravityScale);
+
         ActorSFXManager.I.Play(ActorSFXManager.Glide);
     }
 
     public override void UpdateNode() {
         ninja.JumpThrowIfInput();
+        ninja.CancelGlideIfInput();
     }
 
     public override void FixedUpdateNode() {}

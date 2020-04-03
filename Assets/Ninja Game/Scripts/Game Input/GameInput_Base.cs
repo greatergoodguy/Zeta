@@ -10,5 +10,6 @@ public class GameInput_Base {
     public virtual bool KeyForCrouch()      { return false; }
     public virtual bool KeyDownForJump()    { return false; }
     public virtual bool KeyForJump()        { return false; }
+    public virtual bool KeyForGlide()       { return false; }
     public virtual bool KeyDownForThrow()   { return false; }
 }

@@ -26,6 +26,8 @@ public class Ninja : MonoBehaviour {
     public float horizontalMaxSpeed = 10;
     public float shurikenHitSFXDelay = 0.25f;
 
+    private bool ignoreLeftRightInput = false;
+
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidbody2D;
 
@@ -47,10 +49,10 @@ public class Ninja : MonoBehaviour {
 
         ninjaNode.UpdateNode();
 
-        if (gameInput.KeyDownForLeft()) {
+        if (gameInput.KeyDownForLeft() && !ignoreLeftRightInput) {
             FaceLeft();
         }
-        if (gameInput.KeyDownForRight()) {
+        if (gameInput.KeyDownForRight() && !ignoreLeftRightInput) {
             FaceRight();
         }
 
@@ -107,7 +109,7 @@ public class Ninja : MonoBehaviour {
 
     public void MoveHorizontal() {
         if (Math.Abs(_rigidbody2D.velocity.x) < horizontalMaxSpeed) {
-            if (gameInput.KeyForLeft()) {
+            if (gameInput.KeyForLeft() && !ignoreLeftRightInput) {
                 if(!isFacingLeft()) {
                     FaceLeft();
                 }
@@ -115,7 +117,7 @@ public class Ninja : MonoBehaviour {
                 Vector2 horizontalForce = horizontalMovementScalar * movement;
                 _rigidbody2D.AddForce(horizontalForce);
             }
-            if (gameInput.KeyForRight()) {
+            if (gameInput.KeyForRight() && !ignoreLeftRightInput) {
                 if (isFacingLeft()) {
                     FaceRight();
                 }
@@ -162,6 +164,12 @@ public class Ninja : MonoBehaviour {
         }
     }
 
+    public void CancelGlideIfInput() {
+        if (!gameInput.KeyForGlide()) {
+            SwitchNode(NinjaNodeFall.I);
+        }
+    }
+
     public void Throw() {
         SwitchNode(NinjaNodeThrow.I);
     }
@@ -200,5 +208,9 @@ public class Ninja : MonoBehaviour {
 
     public bool isFacingLeft() {
         return _spriteRenderer.flipX == true;
+    }
+
+    public void SetIgnoreLeftRightInput(bool _ignoreLeftRightInput) {
+        ignoreLeftRightInput = _ignoreLeftRightInput;
     }
 }
