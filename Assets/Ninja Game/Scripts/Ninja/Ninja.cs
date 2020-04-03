@@ -26,7 +26,8 @@ public class Ninja : MonoBehaviour {
     public float horizontalMaxSpeed = 10;
     public float shurikenHitSFXDelay = 0.25f;
 
-    private bool ignoreLeftRightInput = false;
+    private bool ignoreLeftInput = false;
+    private bool ignoreRightInput = false;
 
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidbody2D;
@@ -49,10 +50,10 @@ public class Ninja : MonoBehaviour {
 
         ninjaNode.UpdateNode();
 
-        if (gameInput.KeyDownForLeft() && !ignoreLeftRightInput) {
+        if (gameInput.KeyDownForLeft() && !ignoreLeftInput) {
             FaceLeft();
         }
-        if (gameInput.KeyDownForRight() && !ignoreLeftRightInput) {
+        if (gameInput.KeyDownForRight() && !ignoreRightInput) {
             FaceRight();
         }
 
@@ -109,15 +110,15 @@ public class Ninja : MonoBehaviour {
 
     public void MoveHorizontal() {
         if (Math.Abs(_rigidbody2D.velocity.x) < horizontalMaxSpeed) {
-            if (gameInput.KeyForLeft() && !ignoreLeftRightInput) {
-                if(!isFacingLeft()) {
+            if (gameInput.KeyForLeft() && !ignoreLeftInput) {
+                if (!isFacingLeft()) {
                     FaceLeft();
                 }
                 Vector2 movement = new Vector2(-1, 0);
                 Vector2 horizontalForce = horizontalMovementScalar * movement;
                 _rigidbody2D.AddForce(horizontalForce);
             }
-            if (gameInput.KeyForRight() && !ignoreLeftRightInput) {
+            if (gameInput.KeyForRight() && !ignoreRightInput) {
                 if (isFacingLeft()) {
                     FaceRight();
                 }
@@ -196,21 +197,26 @@ public class Ninja : MonoBehaviour {
         GameObject goShuriken = Toolbox.Create("Shuriken");
         goShuriken.transform.position = transform.position;
         AgentShuriken shuriken = goShuriken.GetComponent<AgentShuriken>();
-        
-        if(isFacingLeft()) {
+
+        if (isFacingLeft()) {
             shuriken.LaunchLeft();
-        } else {
+        }
+        else {
             shuriken.LaunchRight();
         }
 
-		ActorSFXManager.I.Play(ActorSFXManager.ShurikenThrow);
-	}
+        ActorSFXManager.I.Play(ActorSFXManager.ShurikenThrow);
+    }
 
     public bool isFacingLeft() {
         return _spriteRenderer.flipX == true;
     }
 
-    public void SetIgnoreLeftRightInput(bool _ignoreLeftRightInput) {
-        ignoreLeftRightInput = _ignoreLeftRightInput;
+    public void SetIgnoreLeftInput(bool _ignoreLeftInput) {
+        ignoreLeftInput = _ignoreLeftInput;
+    }
+
+    public void SetIgnoreRightInput(bool _ignoreRightInput) {
+        ignoreRightInput = _ignoreRightInput;
     }
 }

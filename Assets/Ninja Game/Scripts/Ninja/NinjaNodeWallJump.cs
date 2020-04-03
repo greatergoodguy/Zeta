@@ -27,33 +27,37 @@ public class NinjaNodeWallJump : NinjaNode_Base {
             ninja.FaceRight();
             Vector2 jumpForce = new Vector2(1, 1).normalized * Ninja.I.jumpForce;
             _rigidbody.AddForce(jumpForce);
+            ninja.SetIgnoreLeftInput(true);
         }
         else {
             ninja.FaceLeft();
             Vector2 jumpForce = new Vector2(-1, 1).normalized * Ninja.I.jumpForce;
             _rigidbody.AddForce(jumpForce);
+            ninja.SetIgnoreRightInput(true);
         }
 
         elapsedTime = 0;
-        ninja.SetIgnoreLeftRightInput(true);
         ActorSFXManager.I.Play(ActorSFXManager.Jump);
     }
 
     public override void UpdateNode() {
-        elapsedTime += Time.deltaTime;
-
         ninja.JumpThrowIfInput();
         ninja.GlideIfInput();
 
-        if (elapsedTime > holdDuration) {
-            ninja.SetIgnoreLeftRightInput(false);
+        if (elapsedTime < holdDuration) {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime > holdDuration) {
+                ninja.SetIgnoreLeftInput(false);
+                ninja.SetIgnoreRightInput(false);
+            }
         }
     }
 
     public override void FixedUpdateNode() {}
 
     public override void ExitNode() {
-        ninja.SetIgnoreLeftRightInput(false);
+        ninja.SetIgnoreLeftInput(false);
+        ninja.SetIgnoreRightInput(false);
     }
 
     void OnCollisionStay2D(Collision2D collidingObject) {
@@ -65,7 +69,7 @@ public class NinjaNodeWallJump : NinjaNode_Base {
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
-                if (Mathf.Abs(contactPoint2D.normal.x) > 0.75f && _rigidbody.velocity.y < 0) {
+                if (Mathf.Abs(contactPoint2D.normal.x) > 0.75f && _rigidbody.velocity.y <= 0) {
                     ninja.SwitchNode(NinjaNodeWallSlide.I);
                     return;
                 }

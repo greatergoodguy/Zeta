@@ -52,7 +52,7 @@ public class NinjaNodeGlide: NinjaNode_Base {
                 Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
-                if (Mathf.Abs(contactPoint2D.normal.x) > 0.75f && _rigidbody.velocity.y < 0) {
+                if (Mathf.Abs(contactPoint2D.normal.x) > 0.75f && _rigidbody.velocity.y <= 0) {
                     ninja.SwitchNode(NinjaNodeWallSlide.I);
                     return;
                 }
