@@ -10,6 +10,8 @@ public class CameraMan2 : MonoBehaviour {
 
     private Vector3 offset;            //Private variable to store the offset distance between the player and camera
 
+    public float speed = 0.1f;
+
     private void Awake() {
         I = this;
     }
@@ -36,7 +38,16 @@ public class CameraMan2 : MonoBehaviour {
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
         float newPosX = (target.transform.position + offset).x;
         float newPosY = (target.transform.position + offset).y;
-        Vector3 newPosition = new Vector3(newPosX, newPosY, transform.position.z);
+        // Vector3 newPosition = new Vector3(newPosX, newPosY, transform.position.z);
+
+
+        Vector3 newTarget = new Vector3(newPosX, newPosY, transform.position.z);
+        // var fromCameraToTarget = (newTarget - transform.position) * (speed * Time.deltaTime);
+        // Vector3 newPosition = transform.position + fromCameraToTarget;
+
+        Vector3 newPosition = Vector3.Lerp(transform.position, newTarget, speed);
+
+
         transform.position = newPosition;
     }
 }
