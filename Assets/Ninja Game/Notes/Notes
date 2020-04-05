@@ -1,6 +1,4 @@
 - Glide needs to ease in, Glide instantly changes gravity
 - Have Ninja oriented perpendicular to the ground, only when running
-- Wall Jump Controls need to be polished, hard to hit space and left/right control at the same time, Add 0.5 second threshold
 - Normal Jumping needs higher terminal velocity
-- Should not slide when on sloped ground
-- Colliders not aligned when looking left, due to image not being centered
+- Need to change to fall state when running off cliff
