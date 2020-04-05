@@ -5,6 +5,8 @@ using UnityEngine;
 public class NinjaNodeWallSlide : NinjaNode_Base {
     public static NinjaNodeWallSlide I;
 
+    public float holdThreshold = 0.25f;
+
     public ParticleSystem wallSlideParticleSystem;
 
     Ninja ninja;
@@ -14,6 +16,9 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     public float gravityScaleEnter = 20f;
     private float gravityScaleExit;
     private Rigidbody2D _rigidbody;
+
+    private float holdThresholdElapsedTime;
+    private bool isFacingLeft;
 
     void Awake() {
         I = this;
@@ -30,10 +35,59 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
         wallSlideParticleSystem.Play();
         ActorSFXManager.I.Play(ActorSFXManager.WallHitJump);
         ActorSFXManager.I.Play(ActorSFXManager.WallSlide);
+
+        holdThresholdElapsedTime = 0;
+        isFacingLeft = ninja.isFacingLeft();
+        if (isFacingLeft) {
+            ninja.SetIgnoreRightInput(true);
+        }
+        else {
+            ninja.SetIgnoreLeftInput(true);
+        }
     }
 
     public override void UpdateNode() {
         ninja.WallJumpIfInput();
+
+        if (isFacingLeft) {
+            if (ninja.gameInput.KeyDownForRight()) {
+                ninja.SetIgnoreRightInput(true);
+                holdThresholdElapsedTime = 0;
+            }
+            if (ninja.gameInput.KeyForRight()) {
+                holdThresholdElapsedTime += Time.deltaTime;
+            }
+            if (ninja.gameInput.KeyUpForRight()) {
+                holdThresholdElapsedTime = 0;
+            }
+
+            if (holdThresholdElapsedTime > holdThreshold) {
+                ninja.SetIgnoreRightInput(false);
+            }
+            else {
+                ninja.SetIgnoreRightInput(true);
+            }
+            Toolbox.Log("holdThresholdElapsedTime: " + holdThresholdElapsedTime);
+        }
+        else {
+            if (ninja.gameInput.KeyDownForLeft()) {
+                ninja.SetIgnoreLeftInput(true);
+                holdThresholdElapsedTime = 0;
+            }
+            if (ninja.gameInput.KeyForLeft()) {
+                holdThresholdElapsedTime += Time.deltaTime;
+            }
+            if (ninja.gameInput.KeyUpForLeft()) {
+                holdThresholdElapsedTime = 0;
+            }
+
+            if (holdThresholdElapsedTime > holdThreshold) {
+                ninja.SetIgnoreLeftInput(false);
+            }
+            else {
+                ninja.SetIgnoreLeftInput(true);
+            }
+        }
     }
 
     public override void FixedUpdateNode() {}
@@ -43,6 +97,13 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
 
         wallSlideParticleSystem.Stop();
         ActorSFXManager.I.Stop(ActorSFXManager.WallSlide);
+
+        if (isFacingLeft) {
+            ninja.SetIgnoreRightInput(false);
+        }
+        else {
+            ninja.SetIgnoreLeftInput(false);
+        }
     }
 
     void OnCollisionStay2D(Collision2D collidingObject) {

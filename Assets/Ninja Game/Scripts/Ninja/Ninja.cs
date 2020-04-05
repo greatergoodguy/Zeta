@@ -17,7 +17,7 @@ public class Ninja : MonoBehaviour {
     public static Ninja I;
 
 
-    GameInput_Base gameInput;
+    public GameInput_Base gameInput;
     NinjaNode_Base ninjaNode;
 
     public float speed = 5.0f;

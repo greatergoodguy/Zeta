@@ -16,12 +16,20 @@ public class GameInputForUser : GameInput_Base {
         return Input.GetKey(KeyCode.A);
     }
 
+    public override bool KeyUpForLeft() {
+        return Input.GetKeyUp(KeyCode.A);
+    }
+
     public override bool KeyDownForRight() {
         return Input.GetKeyDown(KeyCode.D);
     }
 
     public override bool KeyForRight() {
         return Input.GetKey(KeyCode.D);
+    }
+
+    public override bool KeyUpForRight() {
+        return Input.GetKeyUp(KeyCode.D);
     }
 
     public override bool KeyForCrouch() {
