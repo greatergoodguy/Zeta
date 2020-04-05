@@ -28,8 +28,7 @@ public class CameraMan2 : MonoBehaviour {
         offset = transform.position - target.transform.position;
     }
 
-    // LateUpdate is called after Update each frame
-    void LateUpdate() {
+    void FixedUpdate() {
         if (target == null) {
             return;
         }
