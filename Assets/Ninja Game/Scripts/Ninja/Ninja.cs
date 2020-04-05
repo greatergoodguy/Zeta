@@ -29,11 +29,13 @@ public class Ninja : MonoBehaviour {
     private bool ignoreLeftInput = false;
     private bool ignoreRightInput = false;
 
+    GameObject goVisuals;
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidbody2D;
 
     void Awake() {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        goVisuals = transform.Find("Visuals").gameObject;
+        _spriteRenderer = goVisuals.GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         I = this;
     }
@@ -76,10 +78,12 @@ public class Ninja : MonoBehaviour {
     }
 
     public void FaceLeft() {
+        goVisuals.transform.localPosition = new Vector2(-1.22f, 0);
         _spriteRenderer.flipX = true;
     }
 
     public void FaceRight() {
+        goVisuals.transform.localPosition = new Vector2(0, 0);
         _spriteRenderer.flipX = false;
     }
 
@@ -101,7 +105,7 @@ public class Ninja : MonoBehaviour {
     }
 
     public void SetAnimation(int animation) {
-        GetComponent<Animator>().SetInteger("animation", animation);
+        goVisuals.GetComponent<Animator>().SetInteger("animation", animation);
     }
 
     public Vector3 GetVelocity() {
