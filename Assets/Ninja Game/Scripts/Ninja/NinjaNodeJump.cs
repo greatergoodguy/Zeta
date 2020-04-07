@@ -9,10 +9,10 @@ public class NinjaNodeJump : NinjaNode_Base {
     private bool weDidOurJob = false;
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(9);
         var _rigidbody = ninja.GetComponent<Rigidbody2D>();
-        Vector2 jumpForce = this.gameObject.transform.up * Ninja.I.jumpForce;
+        Vector2 jumpForce = this.gameObject.transform.up * ninja.jumpForce;
         _rigidbody.AddForce(jumpForce);
         ActorSFXManager.I.Play(ActorSFXManager.Jump);
     }

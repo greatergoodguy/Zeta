@@ -13,7 +13,7 @@ public class NinjaNodeCrouchThrow : NinjaNode_Base {
     float elapsedTime;
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(16);
         elapsedTime = 0;
         isActive = true;

@@ -13,7 +13,7 @@ public class NinjaNodeWalk : NinjaNode_Base {
     }
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(12);
     }
 

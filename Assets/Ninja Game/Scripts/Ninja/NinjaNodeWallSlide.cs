@@ -24,7 +24,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     }
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(17);
 
         gravityScaleExit = _rigidbody.gravityScale;

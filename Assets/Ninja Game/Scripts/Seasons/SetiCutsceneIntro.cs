@@ -26,7 +26,7 @@ public class SetiCutsceneIntro : SeTi_Base {
         musicManager = ActorMusicManager.I;
         widgets = ActorWidgets.I;
 
-        kunoichi = Ninja.I;
+        kunoichi = Ninja.GetPlayer();
         maskedNinja = MaskedNinja.I;
 
         musicManager.Play(2);

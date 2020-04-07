@@ -6,6 +6,8 @@ public class SetiTitle : SeTi_Base {
 
     public static SetiTitle I;
 
+    Ninja player;
+
     ActorTitleScreen titleScreen;
     ActorWidgets widgets;
     ActorMusicManager musicManager;
@@ -18,6 +20,7 @@ public class SetiTitle : SeTi_Base {
     // Overridden 
     // ==================
     public override void Enter() {
+        player = Ninja.GetPlayer();
         titleScreen = ActorTitleScreen.I;
         widgets = ActorWidgets.I;
         musicManager = ActorMusicManager.I;
@@ -25,7 +28,7 @@ public class SetiTitle : SeTi_Base {
         titleScreen.ShowPanel();
         titleScreen.EnableUI();
         musicManager.Play(1);
-        Ninja.I.DisableGameInput();
+        player.DisableGameInput();
         Time.timeScale = 1;
     }
 

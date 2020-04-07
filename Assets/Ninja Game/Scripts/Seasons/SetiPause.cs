@@ -6,6 +6,8 @@ public class SetiPause : SeTi_Base {
 
     public static SetiPause I;
 
+    Ninja player;
+
     ActorPauseScreen actorPauseScreen;
 
     void Awake() {
@@ -16,10 +18,11 @@ public class SetiPause : SeTi_Base {
     // Overridden 
     // ==================
     public override void Enter() {
+        player = Ninja.GetPlayer();
         actorPauseScreen = ActorPauseScreen.I;
 
         actorPauseScreen.ShowPanel();
-        Ninja.I.DisableGameInput();
+        player.DisableGameInput();
         Time.timeScale = 0;
     }
 

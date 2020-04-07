@@ -15,18 +15,18 @@ public class NinjaNodeWallJump : NinjaNode_Base {
     float elapsedTime;
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(9);
         _rigidbody = ninja.GetComponent<Rigidbody2D>();
         if (ninja.isFacingLeft()) {
             ninja.FaceRight();
-            Vector2 jumpForce = new Vector2(1, 1).normalized * Ninja.I.jumpForce;
+            Vector2 jumpForce = new Vector2(1, 1).normalized * ninja.jumpForce;
             _rigidbody.AddForce(jumpForce);
             ninja.SetIgnoreLeftInput(true);
         }
         else {
             ninja.FaceLeft();
-            Vector2 jumpForce = new Vector2(-1, 1).normalized * Ninja.I.jumpForce;
+            Vector2 jumpForce = new Vector2(-1, 1).normalized * ninja.jumpForce;
             _rigidbody.AddForce(jumpForce);
             ninja.SetIgnoreRightInput(true);
         }

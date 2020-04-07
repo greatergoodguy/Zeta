@@ -18,7 +18,7 @@ public class SetiStage1 : SeTi_Base {
     // ==================
     public override void Enter() {
         stage1 = Stage1.I;
-        kunoichi = Ninja.I;
+        kunoichi = Ninja.GetPlayer();
 
         stage1.EnableStage();
         kunoichi.EnableGameInputForUser();

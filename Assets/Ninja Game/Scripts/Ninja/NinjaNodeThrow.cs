@@ -9,7 +9,7 @@ public class NinjaNodeThrow : NinjaNode_Base {
     float elapsedTime;
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(14);
         elapsedTime = 0;
 

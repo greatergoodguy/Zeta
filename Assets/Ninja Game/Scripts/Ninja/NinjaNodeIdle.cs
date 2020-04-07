@@ -11,7 +11,7 @@ public class NinjaNodeIdle : NinjaNode_Base {
     Rigidbody2D _rigidbody;
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(0);
 
         _rigidbody = GetComponent<Rigidbody2D>();

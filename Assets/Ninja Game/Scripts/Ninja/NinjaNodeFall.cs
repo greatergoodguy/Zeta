@@ -13,7 +13,7 @@ public class NinjaNodeFall: NinjaNode_Base {
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
 
     public override void EnterNode() {
-        ninja = Ninja.I;
+        ninja = GetComponent<Ninja>();
         ninja.SetAnimation(9);
         _rigidbody = ninja.GetComponent<Rigidbody2D>();
         isActive = true;

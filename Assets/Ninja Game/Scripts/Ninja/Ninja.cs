@@ -17,8 +17,7 @@ using UnityEngine;
 [RequireComponent(typeof(NinjaNodeWallSlide))]
 public class Ninja : MonoBehaviour {
 
-    public static Ninja I;
-
+    //public static Ninja I;
 
     public GameInput_Base gameInput;
     NinjaNode_Base ninjaNode;
@@ -49,6 +48,14 @@ public class Ninja : MonoBehaviour {
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidbody2D;
 
+    private static Ninja player;
+    public static Ninja GetPlayer() {
+        if(player == null) {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Ninja>();
+        }
+        return player;
+    }
+
     void Awake() {
         nodeCrouch = GetComponent<NinjaNodeCrouch>();
         nodeCrouchThrow = GetComponent<NinjaNodeCrouchThrow>();
@@ -66,7 +73,8 @@ public class Ninja : MonoBehaviour {
         goVisuals = transform.Find("Visuals").gameObject;
         _spriteRenderer = goVisuals.GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        I = this;
+
+        //I = this;
     }
 
     void Start() {

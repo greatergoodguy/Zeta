@@ -6,6 +6,8 @@ public class SetiGame: SeTi_Base {
 
     public static SetiGame I;
 
+    Ninja player;
+
     void Awake() {
         I = this;
     }
@@ -14,9 +16,10 @@ public class SetiGame: SeTi_Base {
     // Overridden 
     // ==================
     public override void Enter() {
+        player = Ninja.GetPlayer();
         //ActorMusicManager.I.PlayInstant(0);
 
-        Ninja.I.EnableGameInputForUser();
+        player.EnableGameInputForUser();
         Time.timeScale = 1;
     }
 

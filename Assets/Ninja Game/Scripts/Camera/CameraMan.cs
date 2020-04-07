@@ -12,14 +12,17 @@ public class CameraMan : MonoBehaviour {
 
     private Vector3 offset;            //Private variable to store the offset distance between the player and camera
 
+    private Ninja player;
+
     private void Awake() {
         I = this;
     }
 
     // Use this for initialization
     void Start() {
-        if (target == null && Ninja.I != null) {
-            target = Ninja.I.gameObject;
+        player = Ninja.GetPlayer();
+        if (target == null && player != null) {
+            target = player.gameObject;
         }
         if (target == null) {
             return;

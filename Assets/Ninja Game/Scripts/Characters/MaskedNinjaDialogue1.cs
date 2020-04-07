@@ -6,8 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class MaskedNinjaDialogue1 : MonoBehaviour {
 
+    private Ninja player;
+
     bool isTriggered;
     bool shouldPlayCutscene = true;
+
+    private void Start() {
+        player = Ninja.GetPlayer();
+    }
 
     void Update() {
         if (isTriggered && Input.GetKeyDown(KeyCode.RightShift) && shouldPlayCutscene) {
@@ -29,10 +35,10 @@ public class MaskedNinjaDialogue1 : MonoBehaviour {
 
     private void PlayCutscene() {
         shouldPlayCutscene = false;
-        AddEvent(Ninja.I.DisableGameInput);
+        AddEvent(player.DisableGameInput);
         AddEvent(new EventSpeech(gameObject, "Hello World"));
         AddEvent(new EventSpeech(gameObject, "Goodbye World"));
-        AddEvent(Ninja.I.EnableGameInputForUser);
+        AddEvent(player.EnableGameInputForUser);
     }
 
     void AddEvent(Event_Base _event) {

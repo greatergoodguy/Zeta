@@ -46,7 +46,7 @@ public class Stage1 : MonoBehaviour {
     public void EnableStage() {
         gameInputForCutscene = GameInputForCutscene.I;
         widgets = ActorWidgets.I;
-        kunoichi = Ninja.I;
+        kunoichi = Ninja.GetPlayer();
         isActive = true;
         targetHitCounter = 0;
 
