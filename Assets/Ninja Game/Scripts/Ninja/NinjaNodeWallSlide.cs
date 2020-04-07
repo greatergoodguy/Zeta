@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeWallSlide : NinjaNode_Base {
-    public static NinjaNodeWallSlide I;
 
     public float holdThreshold = 0.25f;
 
@@ -21,7 +20,6 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
     private bool isFacingLeft;
 
     void Awake() {
-        I = this;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -116,11 +114,11 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
                 // Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
                 if (contactPoint2D.normal.y > 0.75f && _rigidbody.velocity.y < 20) {
-                    ninja.SwitchNode(NinjaNodeIdle.I);
+                    ninja.SwitchNode(ninja.nodeIdle);
                     return;
                 }
                 if (Mathf.Abs(contactPoint2D.normal.x) < 0.75f) {
-                    ninja.SwitchNode(NinjaNodeFall.I);
+                    ninja.SwitchNode(ninja.nodeFall);
                     return;
                 }
             }
@@ -131,7 +129,7 @@ public class NinjaNodeWallSlide : NinjaNode_Base {
         if (IsActive) {
             int numContacts = collidingObject.GetContacts(contactPoint2Ds);
             if(numContacts == 0) {
-                ninja.SwitchNode(NinjaNodeFall.I);
+                ninja.SwitchNode(ninja.nodeFall);
             }
         }
     }

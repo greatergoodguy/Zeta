@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(NinjaNodeMock))]
-[RequireComponent(typeof(NinjaNodeIdle))]
-[RequireComponent(typeof(NinjaNodeWalk))]
-[RequireComponent(typeof(NinjaNodeJump))]
-[RequireComponent(typeof(NinjaNodeThrow))]
 [RequireComponent(typeof(NinjaNodeCrouch))]
-[RequireComponent(typeof(NinjaNodeJumpThrow))]
 [RequireComponent(typeof(NinjaNodeCrouchThrow))]
 [RequireComponent(typeof(NinjaNodeFall))]
+[RequireComponent(typeof(NinjaNodeGlide))]
+[RequireComponent(typeof(NinjaNodeIdle))]
+[RequireComponent(typeof(NinjaNodeJump))]
+[RequireComponent(typeof(NinjaNodeJumpThrow))]
+[RequireComponent(typeof(NinjaNodeMock))]
+[RequireComponent(typeof(NinjaNodeThrow))]
+[RequireComponent(typeof(NinjaNodeWalk))]
+[RequireComponent(typeof(NinjaNodeWallJump))]
+[RequireComponent(typeof(NinjaNodeWallSlide))]
 public class Ninja : MonoBehaviour {
 
     public static Ninja I;
@@ -19,6 +22,19 @@ public class Ninja : MonoBehaviour {
 
     public GameInput_Base gameInput;
     NinjaNode_Base ninjaNode;
+
+    public NinjaNode_Base nodeCrouch;
+    public NinjaNode_Base nodeCrouchThrow;
+    public NinjaNode_Base nodeFall;
+    public NinjaNode_Base nodeGlide;
+    public NinjaNode_Base nodeIdle;
+    public NinjaNode_Base nodeJump;
+    public NinjaNode_Base nodeJumpThrow;
+    public NinjaNode_Base nodeMock;
+    public NinjaNode_Base nodeThrow;
+    public NinjaNode_Base nodeWalk;
+    public NinjaNode_Base nodeWallJump;
+    public NinjaNode_Base nodeWallSlide;
 
     public float speed = 5.0f;
     public float jumpForce = 800;
@@ -34,6 +50,19 @@ public class Ninja : MonoBehaviour {
     Rigidbody2D _rigidbody2D;
 
     void Awake() {
+        nodeCrouch = GetComponent<NinjaNodeCrouch>();
+        nodeCrouchThrow = GetComponent<NinjaNodeCrouchThrow>();
+        nodeFall = GetComponent<NinjaNodeFall>();
+        nodeGlide = GetComponent<NinjaNodeGlide>();
+        nodeIdle = GetComponent<NinjaNodeIdle>();
+        nodeJump = GetComponent<NinjaNodeJump>();
+        nodeJumpThrow = GetComponent<NinjaNodeJumpThrow>();
+        nodeMock = GetComponent<NinjaNodeMock>();
+        nodeThrow = GetComponent<NinjaNodeThrow>();
+        nodeWalk = GetComponent<NinjaNodeWalk>();
+        nodeWallJump = GetComponent<NinjaNodeWallJump>();
+        nodeWallSlide = GetComponent<NinjaNodeWallSlide>();
+
         goVisuals = transform.Find("Visuals").gameObject;
         _spriteRenderer = goVisuals.GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -42,7 +71,7 @@ public class Ninja : MonoBehaviour {
 
     void Start() {
         gameInput = GameInputForUser.I;
-        ninjaNode = NinjaNodeIdle.I;
+        ninjaNode = nodeIdle;
         ninjaNode.EnterNode();
         ninjaNode.IsActive = true;
         Toolbox.Log(ninjaNode.GetType().Name + ": Enter");
@@ -135,19 +164,19 @@ public class Ninja : MonoBehaviour {
 
     public void WalkIfInput() {
         if ((gameInput.KeyForLeft() || gameInput.KeyForRight())) {
-            SwitchNode(NinjaNodeWalk.I);
+            SwitchNode(nodeWalk);
         }
     }
 
     public void JumpIfInput() {
         if (gameInput.KeyDownForJump()) {
-            SwitchNode(NinjaNodeJump.I);
+            SwitchNode(nodeJump);
         }
     }
 
     public void WallJumpIfInput() {
         if (gameInput.KeyDownForJump()) {
-            SwitchNode(NinjaNodeWallJump.I);
+            SwitchNode(nodeWallJump);
         }
     }
 
@@ -159,41 +188,41 @@ public class Ninja : MonoBehaviour {
 
     public void JumpThrowIfInput() {
         if (gameInput.KeyDownForThrow()) {
-            SwitchNode(NinjaNodeJumpThrow.I);
+            SwitchNode(nodeJumpThrow);
         }
     }
 
     public void GlideIfInput() {
         if (gameInput.KeyDownForJump()) {
-            SwitchNode(NinjaNodeGlide.I);
+            SwitchNode(nodeGlide);
         }
     }
 
     public void CancelGlideIfInput() {
         if (!gameInput.KeyForGlide()) {
-            SwitchNode(NinjaNodeFall.I);
+            SwitchNode(nodeFall);
         }
     }
 
     public void Throw() {
-        SwitchNode(NinjaNodeThrow.I);
+        SwitchNode(nodeThrow);
     }
 
     public void CrouchIfInput() {
         if (gameInput.KeyForCrouch()) {
-            SwitchNode(NinjaNodeCrouch.I);
+            SwitchNode(nodeCrouch);
         }
     }
 
     public void CrouchThrowIfInput() {
         if (gameInput.KeyDownForThrow()) {
-            SwitchNode(NinjaNodeCrouchThrow.I);
+            SwitchNode(nodeCrouchThrow);
         }
     }
 
     public void IdleIfInput() {
         if (!gameInput.KeyForLeft() && !gameInput.KeyForRight()) {
-            SwitchNode(NinjaNodeIdle.I);
+            SwitchNode(nodeIdle);
         }
     }
 

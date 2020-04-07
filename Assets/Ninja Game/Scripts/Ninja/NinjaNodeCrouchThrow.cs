@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeCrouchThrow : NinjaNode_Base {
-    public static NinjaNodeCrouchThrow I;
 
     Ninja ninja;
 
@@ -12,10 +11,6 @@ public class NinjaNodeCrouchThrow : NinjaNode_Base {
     bool isActive;
 
     float elapsedTime;
-
-    void Awake() {
-        I = this;
-    }
 
     public override void EnterNode() {
         ninja = Ninja.I;
@@ -29,11 +24,11 @@ public class NinjaNodeCrouchThrow : NinjaNode_Base {
     public override void UpdateNode() {
         elapsedTime += Time.deltaTime;
         if (elapsedTime > 0.15f) {
-            ninja.SwitchNode(NinjaNodeCrouch.I);
+            ninja.SwitchNode(ninja.nodeCrouch);
         }
 
         if (!Input.GetKey(KeyCode.S)) {
-            ninja.SwitchNode(NinjaNodeIdle.I);
+            ninja.SwitchNode(ninja.nodeIdle);
         }
     }
 

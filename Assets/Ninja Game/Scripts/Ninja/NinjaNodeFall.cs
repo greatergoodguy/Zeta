@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeFall: NinjaNode_Base {
-    public static NinjaNodeFall I;
 
     Ninja ninja;
 
@@ -12,10 +11,6 @@ public class NinjaNodeFall: NinjaNode_Base {
     bool isActive;
 
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
-
-    void Awake() {
-        I = this;
-    }
 
     public override void EnterNode() {
         ninja = Ninja.I;
@@ -46,12 +41,12 @@ public class NinjaNodeFall: NinjaNode_Base {
                 Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
 
                 if (Mathf.Abs(contactPoint2D.normal.x) > 0.75f && _rigidbody.velocity.y <= 0) {
-                    ninja.SwitchNode(NinjaNodeWallSlide.I);
+                    ninja.SwitchNode(ninja.nodeWallSlide);
                     return;
                 }
 
                 if (contactPoint2D.normal.y > 0.75f && _rigidbody.velocity.y < 20) {
-                    ninja.SwitchNode(NinjaNodeIdle.I);
+                    ninja.SwitchNode(ninja.nodeIdle);
                     return;
                 }
             }

@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeCrouch: NinjaNode_Base {
-    public static NinjaNodeCrouch I;
 
     Ninja ninja;
-
-    void Awake()
-    {
-        I = this;
-    }
 
     public override void EnterNode() {
         ninja = Ninja.I;
@@ -21,7 +15,7 @@ public class NinjaNodeCrouch: NinjaNode_Base {
         ninja.CrouchThrowIfInput();
 
         if (!Input.GetKey(KeyCode.S)) {
-            ninja.SwitchNode(NinjaNodeIdle.I);
+            ninja.SwitchNode(ninja.nodeIdle);
         }
     }
 

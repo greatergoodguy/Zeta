@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeJump : NinjaNode_Base {
-    public static NinjaNodeJump I;
 
     Ninja ninja;
 
     private bool weDidOurJob = false;
-
-    void Awake() {
-        I = this;
-    }
 
     public override void EnterNode() {
         ninja = Ninja.I;
@@ -24,7 +19,7 @@ public class NinjaNodeJump : NinjaNode_Base {
 
     public override void UpdateNode() {
         if (weDidOurJob) {
-            ninja.SwitchNode(NinjaNodeFall.I);
+            ninja.SwitchNode(ninja.nodeFall);
         } else {
             weDidOurJob = true;
         }

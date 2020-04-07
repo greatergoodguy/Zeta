@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeWalk : NinjaNode_Base {
-    public static NinjaNodeWalk I;
 
     Ninja ninja;
 
     private Rigidbody2D _rigidbody;
 
     void Awake() {
-        I = this;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -31,7 +29,7 @@ public class NinjaNodeWalk : NinjaNode_Base {
     public override void ExitNode() {}
 
     public NinjaNode_Base GetNextNode() {
-        return NinjaNodeMock.I;
+        return ninja.nodeMock;
     }
 
     public bool IsNodeFinished() {

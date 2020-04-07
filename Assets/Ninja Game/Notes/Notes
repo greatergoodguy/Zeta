@@ -2,3 +2,4 @@
 - Have Ninja oriented perpendicular to the ground, only when running
 - Normal Jumping needs higher terminal velocity
 - Need to change to fall state when running off cliff
+- Refactor Ninja Scripts to avoid using Singletons

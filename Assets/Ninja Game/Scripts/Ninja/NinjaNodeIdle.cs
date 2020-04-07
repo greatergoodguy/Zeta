@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeIdle : NinjaNode_Base {
-    public static NinjaNodeIdle I;
-
+   
     Ninja ninja;
 
     ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
 
-    Rigidbody2D rigidbody;
-
-    void Awake() {
-        I = this;
-    }
+    Rigidbody2D _rigidbody;
 
     public override void EnterNode() {
         ninja = Ninja.I;
         ninja.SetAnimation(0);
 
-        rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public override void UpdateNode() {
@@ -32,7 +27,7 @@ public class NinjaNodeIdle : NinjaNode_Base {
     public override void FixedUpdateNode() {}
 
     public override void ExitNode() {
-        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
 
@@ -43,7 +38,7 @@ public class NinjaNodeIdle : NinjaNode_Base {
             for (int i = 0; i < numContacts; i++) {
                 var contactPoint2D = contactPoint2Ds[i];
                 if (contactPoint2D.normal.y > 0.2f) {
-                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                    _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
                 }
             }
         }

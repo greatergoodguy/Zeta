@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeThrow : NinjaNode_Base {
-    public static NinjaNodeThrow I;
-
+    
     Ninja ninja;
 
     float elapsedTime;
-
-    void Awake() {
-        I = this;
-    }
 
     public override void EnterNode() {
         ninja = Ninja.I;
@@ -24,7 +19,7 @@ public class NinjaNodeThrow : NinjaNode_Base {
     public override void UpdateNode() {
         elapsedTime += Time.deltaTime;
         if(elapsedTime > 0.15f) {
-            ninja.SwitchNode(NinjaNodeIdle.I);
+            ninja.SwitchNode(ninja.nodeIdle);
         }
     }
 

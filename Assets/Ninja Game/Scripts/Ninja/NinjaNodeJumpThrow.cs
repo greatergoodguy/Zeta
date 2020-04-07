@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaNodeJumpThrow : NinjaNode_Base {
-    public static NinjaNodeJumpThrow I;
 
     Ninja ninja;
 
@@ -12,10 +11,6 @@ public class NinjaNodeJumpThrow : NinjaNode_Base {
     bool isActive;
 
     float elapsedTime;
-
-    void Awake() {
-        I = this;
-    }
 
     public override void EnterNode() {
         ninja = Ninja.I;
@@ -29,7 +24,7 @@ public class NinjaNodeJumpThrow : NinjaNode_Base {
     public override void UpdateNode() {
         elapsedTime += Time.deltaTime;
         if (elapsedTime > 0.15f) {
-            ninja.SwitchNode(NinjaNodeFall.I);
+            ninja.SwitchNode(ninja.nodeFall);
         } else {
             ninja.GlideIfInput();
         }
@@ -44,7 +39,7 @@ public class NinjaNodeJumpThrow : NinjaNode_Base {
 
     void OnCollisionEnter2D(Collision2D collidingObject) {
         if (isActive) {
-            ninja.SwitchNode(NinjaNodeIdle.I);
+            ninja.SwitchNode(ninja.nodeIdle);
         }
     }
 
