@@ -12,6 +12,8 @@ public class SetiTitle : SeTi_Base {
     ActorWidgets widgets;
     ActorMusicManager musicManager;
 
+    bool isGameStarting = false;
+
     void Awake() {
         I = this;
     }
@@ -37,9 +39,25 @@ public class SetiTitle : SeTi_Base {
     }
 
     public void StartGame() {
+        if(isGameStarting) {
+            return;
+        }
+
+        isGameStarting = true;
         musicManager.Stop();
         widgets.FadeOut(() => {
             SwitchSeason(SetiCutsceneIntro.I);
+            isGameStarting = false;
         });
+    }
+
+    public void QuitGame() {
+#if UNITY_EDITOR
+        // Application.Quit() does not work in the editor so
+        // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
     }
 }

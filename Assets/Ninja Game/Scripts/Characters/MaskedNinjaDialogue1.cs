@@ -39,6 +39,8 @@ public class MaskedNinjaDialogue1 : MonoBehaviour {
         AddEvent(new EventSpeech(gameObject, "Hello World"));
         AddEvent(new EventSpeech(gameObject, "Goodbye World"));
         AddEvent(player.EnableGameInputForUser);
+        AddEvent(() => { shouldPlayCutscene = true; });
+
     }
 
     void AddEvent(Event_Base _event) {
