@@ -140,13 +140,13 @@ public class Ninja : MonoBehaviour {
     }
 
     public void JumpIfInput() {
-        if (gameInput.KeyForJump()) {
+        if (gameInput.KeyDownForJump()) {
             SwitchNode(NinjaNodeJump.I);
         }
     }
 
     public void WallJumpIfInput() {
-        if (gameInput.KeyForJump()) {
+        if (gameInput.KeyDownForJump()) {
             SwitchNode(NinjaNodeWallJump.I);
         }
     }
@@ -164,7 +164,7 @@ public class Ninja : MonoBehaviour {
     }
 
     public void GlideIfInput() {
-        if (gameInput.KeyForJump()) {
+        if (gameInput.KeyDownForJump()) {
             SwitchNode(NinjaNodeGlide.I);
         }
     }

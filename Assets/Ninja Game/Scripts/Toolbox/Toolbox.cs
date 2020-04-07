@@ -10,11 +10,11 @@ public static class Toolbox {
     public static void Log(string message) {
         if (!enabled) { return; }
 
-        StackFrame frame = new StackFrame(1);
-        MethodBase method = frame.GetMethod();
-        string tag = method.DeclaringType.ToString();
+        //StackFrame frame = new StackFrame(1);
+        //MethodBase method = frame.GetMethod();
+        //string tag = method.DeclaringType.ToString();
 
-        UnityEngine.Debug.Log(tag + ": " + message);
+        //UnityEngine.Debug.Log(tag + ": " + message);
     }
 
     public static Sprite LoadSprite(string spriteName) {
