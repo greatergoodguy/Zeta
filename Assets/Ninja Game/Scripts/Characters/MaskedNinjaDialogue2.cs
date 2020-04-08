@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class MaskedNinjaDialogue1 : MonoBehaviour {
+public class MaskedNinjaDialogue2 : MonoBehaviour {
 
     private Ninja player;
 
@@ -42,7 +42,7 @@ public class MaskedNinjaDialogue1 : MonoBehaviour {
         }
     }
 
-    private void ShowOutline() {
+    private void ShowOutline() { 
         material.SetFloat("_OutlineAlpha", 1f);
     }
 
@@ -53,10 +53,6 @@ public class MaskedNinjaDialogue1 : MonoBehaviour {
     private void PlayCutscene() {
         shouldPlayCutscene = false;
         AddEvent(HideOutline);
-        AddEvent(player.DisableGameInput);
-        AddEvent(new EventSpeech(gameObject, "Hello World"));
-        AddEvent(new EventSpeech(gameObject, "Goodbye World"));
-        AddEvent(player.EnableGameInputForUser);
         AddEvent(() => { shouldPlayCutscene = true; });
 
     }
