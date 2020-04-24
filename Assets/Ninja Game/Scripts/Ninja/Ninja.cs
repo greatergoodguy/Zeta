@@ -50,7 +50,7 @@ public class Ninja : MonoBehaviour {
 
     private static Ninja player;
     public static Ninja GetPlayer() {
-        if(player == null) {
+        if (player == null) {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Ninja>();
         }
         return player;
@@ -260,5 +260,29 @@ public class Ninja : MonoBehaviour {
 
     public void SetIgnoreRightInput(bool _ignoreRightInput) {
         ignoreRightInput = _ignoreRightInput;
+    }
+
+    ContactPoint2D[] contactPoint2Ds = new ContactPoint2D[16];
+    float newAngleZ = 0;
+    void OnCollisionStay2D(Collision2D collidingObject) {
+        Toolbox.Log("OnCollisionStay2D()");
+        int numContacts = collidingObject.GetContacts(contactPoint2Ds);
+        for (int i = 0; i < numContacts; i++) {
+            ContactPoint2D contactPoint2D = contactPoint2Ds[i];
+            //Toolbox.Log("contactPoint2D.normal - " + contactPoint2D.normal);
+            Debug.DrawRay(contactPoint2D.point, contactPoint2D.normal * 10, Color.red, 2.0f);
+
+            // Claim the value of oldAngleZ to be between -180 and 180 so it matches
+            // the unites of newAngleZ
+            float oldAngleZ = transform.eulerAngles.z;
+            oldAngleZ = oldAngleZ > 180 ? oldAngleZ - 360 : oldAngleZ;
+
+            newAngleZ = Vector3.SignedAngle(Vector3.up, contactPoint2D.normal, Vector3.forward);
+
+            if (newAngleZ > -45 && newAngleZ < 45) {
+                Vector3 newAngle = new Vector3(0, 0, Mathf.Lerp(oldAngleZ, newAngleZ, 0.5f));
+                transform.eulerAngles = newAngle;
+            }
+        }
     }
 }
