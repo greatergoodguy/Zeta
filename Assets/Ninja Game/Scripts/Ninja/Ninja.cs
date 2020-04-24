@@ -44,7 +44,7 @@ public class Ninja : MonoBehaviour {
     private bool ignoreLeftInput = false;
     private bool ignoreRightInput = false;
 
-    GameObject goVisuals;
+    GameObject goVisualsContainer;
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidbody2D;
 
@@ -70,9 +70,10 @@ public class Ninja : MonoBehaviour {
         nodeWallJump = GetComponent<NinjaNodeWallJump>();
         nodeWallSlide = GetComponent<NinjaNodeWallSlide>();
 
-        goVisuals = transform.Find("Visuals").gameObject;
-        _spriteRenderer = goVisuals.GetComponent<SpriteRenderer>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        goVisualsContainer = transform.Find("Visuals Container").gameObject;
+        _spriteRenderer = goVisualsContainer.GetComponentInChildren<SpriteRenderer>();
+        //_rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponentInChildren<Rigidbody2D>();
 
         //I = this;
     }
@@ -115,12 +116,12 @@ public class Ninja : MonoBehaviour {
     }
 
     public void FaceLeft() {
-        goVisuals.transform.localPosition = new Vector2(-1.22f, 0);
+        goVisualsContainer.transform.localPosition = new Vector2(-1.22f, 0);
         _spriteRenderer.flipX = true;
     }
 
     public void FaceRight() {
-        goVisuals.transform.localPosition = new Vector2(0, 0);
+        goVisualsContainer.transform.localPosition = new Vector2(0, 0);
         _spriteRenderer.flipX = false;
     }
 
@@ -142,7 +143,7 @@ public class Ninja : MonoBehaviour {
     }
 
     public void SetAnimation(int animation) {
-        goVisuals.GetComponent<Animator>().SetInteger("animation", animation);
+        goVisualsContainer.GetComponentInChildren<Animator>().SetInteger("animation", animation);
     }
 
     public Vector3 GetVelocity() {
